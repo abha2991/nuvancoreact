@@ -1,0 +1,14 @@
+install node "node-v18.13.0-x64"
+1. CMD open krna hai jaha pr project create krna hai
+2. enter command "npx create-react-app" "xyz (no space)"joh bhi project ka name dena hai
+3. enter command in terminal "npm run start"
+
+extention name for auto complete"ES7+ React/Redux/React-Native snippets"
+
+owl-install
+https://www.c-sharpcorner.com/article/how-to-use-owl-carousel-in-reactjs/
+
+npm run build (for live)
+ npm install -g serve(for new laptop for checking build)
+
+open build folder in cmd and run serve -s

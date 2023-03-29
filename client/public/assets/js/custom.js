@@ -1,0 +1,44 @@
+ 
+ $(document).ready(function(){
+  console.log(owlCarousel)
+});
+
+$('.services-clm-sld').owlCarousel({
+  loop:true,
+  margin:10,
+  nav:true,
+  autoplay:true,
+  dots:false,
+  autoplayHoverPause:true,
+  responsive:{
+    0:{
+      items:1
+    },
+    600:{
+      items:3
+    },
+    1000:{
+      items:4
+    }
+  }
+})
+
+ $('.courseRajeev').owlCarousel({
+  loop:true,
+  margin:10,
+  nav:false,
+  autoplay:true,
+  autoplayHoverPause:true,
+  dots:false,
+  responsive:{
+    0:{
+      items:1
+    },
+    600:{
+      items:3
+    },
+    1000:{
+      items:4
+    }
+  }
+})

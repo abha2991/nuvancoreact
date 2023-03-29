@@ -1,0 +1,126 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.owl-theme .owl-nav.disabled + .owl-dots {
+  margin-top: 2px !important;
+}
+
+.owl-carousel .owl-stage-outer {
+  bottom: 10px !important;
+}
+
+.owl-theme .owl-prev {
+  background-image: none !important;
+  left: 0 !important;
+  opacity: 1 !important;
+  background: #e55922 !important;
+  color: #fff !important;
+  height: 93px !important;
+  top: 75.6% !important;
+  width: 90px !important;
+  position: absolute;
+
+  bottom: 0;
+
+  display: flex;
+  -webkit-box-align: center;
+
+  align-items: center;
+  -webkit-box-pack: center;
+
+  justify-content: center;
+
+  color: #fff;
+  text-align: center;
+}
+
+.owl-theme .owl-next {
+  right: 24.5px !important;
+  opacity: 1 !important;
+  background: #e55922 !important;
+  color: #fff !important;
+  height: 93px !important;
+  top: 75.6% !important;
+  width: 91px !important;
+  position: absolute;
+
+  bottom: 0 !important;
+
+  display: flex !important;
+  -webkit-box-align: center !important;
+
+  align-items: center !important;
+  -webkit-box-pack: center !important;
+
+  justify-content: center !important;
+
+  color: #fff !important;
+  text-align: center !important;
+}
+
+.owl-theme.icon-prev {
+  font-size: 100px;
+}
+
+.owl-theme button {
+  text-transform: none;
+  font-size: 50px !important;
+}
+
+.image-size {
+  height: 480px;
+}
+
+.carousel-indicators .active {
+  background-color: #e55922 !important;
+}
+.input-group .btn {
+  z-index: 2;
+  position: absolute !important;
+}
+
+.modal-header,
+.modal-footer {
+  border-bottom: none !important;
+  border-top: none !important;
+  padding: 10px !important;
+}
+
+.form-control-input {
+  display: block;
+  width: 100%;
+
+  line-height: 1.5 !important;
+  /*color: #495057;*/
+  background-color: #fff !important;
+  background-clip: padding-box !important;
+  border: 1px solid #ced4da !important;
+  border-radius: 0.25rem !important;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+}
+
+.form-select-input {
+  font-size: 19px !important;
+  font-weight: 600;
+  background: rgb(45 60 60 / 15%) !important;
+  padding: 10px !important;
+}
+
+.inv {
+  display: none;
+}
+
+.vis {
+  display: block;
+}
