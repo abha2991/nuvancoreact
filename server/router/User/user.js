@@ -520,3 +520,49 @@ module.exports.propertyDetails = async (req, res) => {
     }
   );
 };
+
+module.exports.additionalDetails = async (req, res) => {
+  console.log(req);
+  const image = req?.file;
+  let additionalImage = image?.filename;
+
+  console.log({ additionalImage });
+  const { additionalCustomerId, additionalBasicId, additionalRequirement } =
+    req.body;
+
+  await connection.query(
+    `Select * FROM additional_details`,
+    function (error, results, fields) {
+      if (error) throw error;
+
+      connection.query(
+        "INSERT INTO `additional_details`(`ad_customer_id`,`ad_basic_id`,`ad_requirement`,`ad_image`,`created_at`) VALUES(?,?,?,?,?)",
+        [
+          additionalCustomerId,
+          additionalBasicId,
+          additionalRequirement,
+          additionalImage,
+          new Date(),
+        ],
+        (err, result) => {
+          if (err) {
+            throw err;
+            return res.status(400).json({ status: "failed", message: err });
+          } else {
+            return res.status(200).json({
+              status: "success",
+
+              message: "Additional Details Entered Successfully",
+              id: result.insertId,
+            });
+          }
+        }
+      );
+    }
+  );
+};
+
+module.exports.data = async (req, res) => {
+  console.log(req.body);
+  return req.body;
+};

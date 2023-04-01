@@ -12,6 +12,7 @@ import "animate.css/animate.min.css";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 
 import PropertyDetails from "./PropertyDetails";
+import AdditionalDetails from "./AdditionalDetails";
 
 const Test = () => {
   const { user } = useUser();
@@ -508,7 +509,9 @@ const Test = () => {
                 </li>
               </ul>
             </div>
-            <form className="tabs-pro">
+            {/*<form className="tabs-pro">*/}
+
+            <div className="tabs-pro form-style">
               <div className="tab-content">
                 <div className="tab-pane  active" role="tabpanel" id="step1">
                   <h2>Basic Details</h2>
@@ -5494,36 +5497,38 @@ const Test = () => {
                 {/*    </button>*/}
                 {/*  </div>*/}
                 {/*</div>*/}
-                <div className="tab-pane" role="tabpanel" id="complete">
-                  <div className="form-group">
-                    <label htmlFor="exampleFormControlTextarea1">
-                      Write More About Your Requirement
-                    </label>
-                    <textarea
-                      className="form-control"
-                      id="exampleFormControlTextarea1"
-                      rows="3"
-                    ></textarea>
-                  </div>
-                  <div className="form-group">
-                    <span className="choose_file propery-sy">
-                      <input
-                        type="file"
-                        id="attach_file"
-                        name="attach_file"
-                        accept="image/webp, image/jpeg"
-                      />
-                    </span>
-                  </div>
-                  <div className="sub-lat">
-                    <button type="button" className="btn btn-primary next-step">
-                      Submit
-                    </button>
-                  </div>
-                </div>
+                {/*<div className="tab-pane" role="tabpanel" id="complete">*/}
+                {/*  <div className="form-group">*/}
+                {/*    <label htmlFor="exampleFormControlTextarea1">*/}
+                {/*      Write More About Your Requirement*/}
+                {/*    </label>*/}
+                {/*    <textarea*/}
+                {/*      className="form-control"*/}
+                {/*      id="exampleFormControlTextarea1"*/}
+                {/*      rows="3"*/}
+                {/*    ></textarea>*/}
+                {/*  </div>*/}
+                {/*  <div className="form-group">*/}
+                {/*    <span className="choose_file propery-sy">*/}
+                {/*      <input*/}
+                {/*        type="file"*/}
+                {/*        id="attach_file"*/}
+                {/*        name="attach_file"*/}
+                {/*        accept="image/webp, image/jpeg"*/}
+                {/*      />*/}
+                {/*    </span>*/}
+                {/*  </div>*/}
+                {/*  <div className="sub-lat">*/}
+                {/*    <button type="button" className="btn btn-primary next-step">*/}
+                {/*      Submit*/}
+                {/*    </button>*/}
+                {/*  </div>*/}
+                {/*</div>*/}
+                <AdditionalDetails basicId={basicId} />
                 <div className="clearfix"></div>
               </div>
-            </form>
+              {/*</form>*/}
+            </div>
           </div>
         </section>
       </div>

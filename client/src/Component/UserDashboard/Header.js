@@ -4,6 +4,7 @@ import useUser from "../../hooks/useUser";
 
 const Header = () => {
   const { user } = useUser();
+
   return (
     <>
       <header className="main-header">

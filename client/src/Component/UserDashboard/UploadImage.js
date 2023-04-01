@@ -1,15 +1,16 @@
 import "../../UserDashboard.css";
 import React, { useEffect, useRef, useState } from "react";
+import useUser from "../../hooks/useUser";
 
 const UploadImage = () => {
+  const { fetchUser } = useUser();
   const inputRef = useRef(null);
   const getData = async () => {
     const formData = new FormData();
     formData.append("file", inputRef.current.files[0]);
-    console.log({ formData });
 
     const response = await fetch(
-      `http://localhost:8001/user-update-profilepic`,
+      `http://localhost:8001/user-update-profilepic/ProfileImage`,
       {
         method: "POST",
         credentials: "include",
@@ -18,8 +19,12 @@ const UploadImage = () => {
       }
     );
     const data = await response.json();
-
-    console.log({ data });
+    if (response.status === 400 || !response) {
+      window.alert(response.message);
+    } else if (response.status === 200) {
+      window.alert(response.message);
+      await fetchUser();
+    }
   };
   return (
     <>
@@ -31,7 +36,7 @@ const UploadImage = () => {
               <a href="#">Home</a>
             </li>
             <li>
-              <i className="fa fa-angle-right"></i> Draft
+              <i className="fa fa-angle-right"></i> Upload Image
             </li>
           </ol>
         </div>

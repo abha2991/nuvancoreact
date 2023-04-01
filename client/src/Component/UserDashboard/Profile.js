@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 const Profile = () => {
   const { user } = useUser();
+
   console.log(user[0]?.customer_city);
   const [countryOptions, setCountryOptions] = useState([]);
   const [stateOptions, setStateOptions] = useState([]);

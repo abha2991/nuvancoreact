@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
-
+import useUser from "../hooks/useUser";
 const Logout = () => {
   const navigate = useNavigate();
+  const { setUser } = useUser();
+
   const logout = async (e) => {
     const res = await fetch("http://localhost:8001/user-logout", {
       method: "GET",
@@ -12,8 +14,9 @@ const Logout = () => {
       },
     });
     const response = await res.json();
-    console.log({ response });
+
     if (response.status == "success") {
+      setUser(null);
       navigate("/");
     } else {
       alert("Please Try Again. Something Went Wong!!");

@@ -7,8 +7,11 @@ import { useNavigate } from "react-router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import useUser from "../hooks/useUser";
+import { useQuery } from "react-query";
+
 const Header = () => {
   const { user } = useUser();
+  const { fetchUser } = useUser();
 
   const [show, setShow] = useState(false);
 
@@ -71,25 +74,10 @@ const Header = () => {
       window.alert(response.message);
     } else if (res.status === 200) {
       window.alert("Logged In Successfully");
-      //window.location.reload();
-      navigate("/dashboard");
-    }
-  };
 
-  const logout = async (e) => {
-    const res = await fetch("http://localhost:8001/user-logout", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const response = await res.json();
-    console.log({ response });
-    if (response.status == "success") {
+      await fetchUser();
       window.location.reload();
-    } else {
-      alert("Please Try Again. Something Went Wong!!");
+      // navigate("/dashboard");
     }
   };
 
@@ -115,6 +103,7 @@ const Header = () => {
     if (res.status === 400 || !response) {
       window.alert(response.message);
     } else if (res.status === 200) {
+      window.alert("Registered Successfully");
       window.location.reload();
     }
   };
@@ -122,6 +111,8 @@ const Header = () => {
   const startProject = () => {
     alert("Please Login First!!!");
   };
+
+  console.log({ user });
 
   if (user) {
     return (

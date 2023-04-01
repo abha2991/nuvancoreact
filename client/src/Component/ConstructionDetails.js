@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import FloorDetails from "./FloorDetails";
+import ConstructionDetails2 from "./ConstructionDetails2";
 
 const ConstructionDetails = (props) => {
   const displayFunc = (id) => {
@@ -327,31 +328,42 @@ const ConstructionDetails = (props) => {
         </div>
 
         <div id="two" style={{ display: "none" }}>
-          <FloorDetails
+          <ConstructionDetails2
+            bedRoomId={"second-floor-roomset"}
+            objId={"floor-one"}
             floorNo={1}
             floor={"First Floor"}
-            id={"second-floor-room"}
-            bedRoomId={"second-floor-roomset"}
-            displayFunction={displaySecondFloorBedroom}
-            value1={"second-floorbedroom-one"}
-            value2={"second-floorbedroom-two"}
-            value3={"second-floorbedroom-three"}
-            value4={"second-floorbedroom-four"}
           />
+          {/*<FloorDetails*/}
+          {/*  floorNo={1}*/}
+          {/*  floor={"First Floor"}*/}
+          {/*  id={"second-floor-room"}*/}
+          {/*  bedRoomId={"second-floor-roomset"}*/}
+          {/*  displayFunction={displaySecondFloorBedroom}*/}
+          {/*  value1={"second-floorbedroom-one"}*/}
+          {/*  value2={"second-floorbedroom-two"}*/}
+          {/*  value3={"second-floorbedroom-three"}*/}
+          {/*  value4={"second-floorbedroom-four"}*/}
+          {/*/>*/}
         </div>
 
         <div id="three" className="three-flrset" style={{ display: "none" }}>
-          <FloorDetails
+          <ConstructionDetails2
+            bedRoomId={"third-floor-roomset"}
             floorNo={2}
             floor={"Second Floor"}
-            id={"second-floor-room"}
-            bedRoomId={"third-floor-roomset"}
-            displayFunction={displayThirdFloorBedroom}
-            value1={"third-floorbedroom-one"}
-            value2={"third-floorbedroom-two"}
-            value3={"third-floorbedroom-three"}
-            value4={"third-floorbedroom-four"}
           />
+          {/*<FloorDetails*/}
+          {/*  floorNo={2}*/}
+          {/*  floor={"Second Floor"}*/}
+          {/*  id={"second-floor-room"}*/}
+          {/*  bedRoomId={"third-floor-roomset"}*/}
+          {/*  displayFunction={displayThirdFloorBedroom}*/}
+          {/*  value1={"third-floorbedroom-one"}*/}
+          {/*  value2={"third-floorbedroom-two"}*/}
+          {/*  value3={"third-floorbedroom-three"}*/}
+          {/*  value4={"third-floorbedroom-four"}*/}
+          {/*/>*/}
         </div>
 
         <div id="four" style={{ display: "none" }}>

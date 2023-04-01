@@ -6,7 +6,7 @@ import normal from "../images/normal.png";
 import tight from "../images/tity.png";
 import cosy from "../images/cosy.png";
 
-const ConstructionDetails1 = (props) => {
+const ConstructionDetails2 = (props) => {
   const [val, setVal] = useState({ val: "" });
 
   const specifications = {
@@ -50,21 +50,34 @@ const ConstructionDetails1 = (props) => {
     const value2 = e.target.value;
 
     setVal({ ...val, [name2]: value2 });
+    let obj = "bed" + "-" + props.bedRoomId;
 
-    if (value2 == "1") {
-      let getDiv1 = document.getElementById("bed");
+    for (let j = 1; j <= props.floorNo; j++) {
+      let getDiv1 = document.getElementById(obj);
       getDiv1.style.display = "block";
-
-      setData([specifications]);
-    } else if (value2 == "2") {
-      let getDiv1 = document.getElementById("bed");
-      getDiv1.style.display = "block";
-      setData([specifications, specifications]);
-    } else if (value2 == "3") {
-      setData([specifications, specifications, specifications]);
-    } else if (value2 == "4") {
-      setData([specifications, specifications, specifications, specifications]);
+      for (let k = 1; k <= value2; k++) {
+        setData([specifications]);
+      }
+      // if (value2 == "1") {
+      //   let getDiv1 = document.getElementById(obj);
+      //   getDiv1.style.display = "block";
+      //
+      //   setData([specifications]);
+      // } else if (value2 == "2") {
+      //   let getDiv1 = document.getElementById(obj);
+      //   getDiv1.style.display = "block";
+      //   setData([specifications, specifications]);
+      // } else if (value2 == "3") {
+      //   setData([specifications, specifications, specifications]);
+      // } else if (value2 == "4") {
+      //   setData([
+      //     specifications,
+      //     specifications,
+      //     specifications,
+      //     specifications,
+      //   ]);
       //setData((existing) => [...existing, specifications]);
+      //}
     }
   };
 
@@ -99,7 +112,7 @@ const ConstructionDetails1 = (props) => {
               <option value="4">4</option>
             </select>
           </div>
-          <div id="bed" style={{ display: "none" }}>
+          <div id={"bed" + "-" + props.bedRoomId} style={{ display: "none" }}>
             {data.map((obj, i) => (
               <div key={i}>
                 <div className="three-floor-sec">
@@ -110,14 +123,14 @@ const ConstructionDetails1 = (props) => {
                         <input
                           type="radio"
                           //id="floor1"
-                          id={"floor1" + "-" + i}
+                          id={"floor1" + "-" + props.bedRoomId + "-" + i}
                           name="luxury"
                           value={obj.luxury}
                           onChange={handleInputs(i)}
                           className="selector-item_radio"
                         />
                         <label
-                          htmlFor={"floor1" + "-" + i}
+                          htmlFor={"floor1" + "-" + props.bedRoomId + "-" + i}
                           className="selector-item_label"
                         >
                           <img src={luxury} alt="" /> Luxury
@@ -128,14 +141,14 @@ const ConstructionDetails1 = (props) => {
                         <input
                           type="radio"
                           //id="floor2"
-                          id={"floor2" + "-" + i}
+                          id={"floor2" + "-" + props.bedRoomId + "-" + i}
                           name="cosy"
                           value={obj.cosy}
                           onChange={handleInputs(i)}
                           className="selector-item_radio"
                         />
                         <label
-                          htmlFor={"floor2" + "-" + i}
+                          htmlFor={"floor2" + "-" + props.bedRoomId + "-" + i}
                           className="selector-item_label"
                         >
                           <img src={cosy} alt="" /> Cosy
@@ -145,14 +158,14 @@ const ConstructionDetails1 = (props) => {
                         <input
                           type="radio"
                           //id="floor3"
-                          id={"floor3" + "-" + i}
+                          id={"floor3" + "-" + props.bedRoomId + "-" + i}
                           name="normal"
                           value={obj.normal}
                           onChange={handleInputs(i)}
                           className="selector-item_radio"
                         />
                         <label
-                          htmlFor={"floor3" + "-" + i}
+                          htmlFor={"floor3" + "-" + props.bedRoomId + "-" + i}
                           className="selector-item_label"
                         >
                           <img src={normal} alt="" /> Normal
@@ -162,14 +175,14 @@ const ConstructionDetails1 = (props) => {
                         <input
                           type="radio"
                           //id="floor4"
-                          id={"floor4" + "-" + i}
+                          id={"floor4" + "-" + props.bedRoomId + "-" + i}
                           name="tight"
                           value={obj.tight}
                           onChange={handleInputs(i)}
                           className="selector-item_radio"
                         />
                         <label
-                          htmlFor={"floor4" + "-" + i}
+                          htmlFor={"floor4" + "-" + props.bedRoomId + "-" + i}
                           className="selector-item_label"
                         >
                           <img src={tight} alt="" />
@@ -182,32 +195,44 @@ const ConstructionDetails1 = (props) => {
                     <input
                       type="checkbox"
                       //id="bath-yes"
-                      id={"bath-yes" + "-" + i}
+                      id={"bath-yes" + "-" + props.bedRoomId + "-" + i}
                       name="bathroom"
                       value={obj.bathroom}
                       onChange={handleInputs(i)}
                     />
-                    <label htmlFor={"bath-yes" + "-" + i}>Bathroom</label>
+                    <label
+                      htmlFor={"bath-yes" + "-" + props.bedRoomId + "-" + i}
+                    >
+                      Bathroom
+                    </label>
 
                     <input
                       type="checkbox"
                       //id="bal-yes"
-                      id={"bal-yes" + "-" + i}
+                      id={"bal-yes" + "-" + props.bedRoomId + "-" + i}
                       name="balcony"
                       value={obj.balcony}
                       onChange={handleInputs(i)}
                     />
-                    <label htmlFor={"bal-yes" + "-" + i}>Balcony</label>
+                    <label
+                      htmlFor={"bal-yes" + "-" + props.bedRoomId + "-" + i}
+                    >
+                      Balcony
+                    </label>
 
                     <input
                       type="checkbox"
                       //id="dress-yes"
-                      id={"dress-yes" + "-" + i}
+                      id={"dress-yes" + "-" + props.bedRoomId + "-" + i}
                       name="dressingArea"
                       value={obj.dressingArea}
                       onChange={handleInputs(i)}
                     />
-                    <label htmlFor={"dress-yes" + "-" + i}>Dressing Area</label>
+                    <label
+                      htmlFor={"dress-yes" + "-" + props.bedRoomId + "-" + i}
+                    >
+                      Dressing Area
+                    </label>
                   </div>
                   <h5 className="mt-4">Common Area</h5>
                   <div className="floor-th form-group mt-4">
@@ -342,4 +367,4 @@ const ConstructionDetails1 = (props) => {
   );
 };
 
-export default ConstructionDetails1;
+export default ConstructionDetails2;

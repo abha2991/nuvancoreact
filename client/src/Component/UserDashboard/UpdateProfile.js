@@ -5,18 +5,20 @@ import { useNavigate } from "react-router";
 
 const UpdateProfile = () => {
   const { user } = useUser();
+  const { fetchUser } = useUser();
   const navigate = useNavigate();
   const [countryOptions, setCountryOptions] = useState([]);
   const [stateOptions, setStateOptions] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
+
   const [country, setCountry] = useState({
-    Country: "",
+    Country: user[0]?.customer_country,
   });
   const [state, setState] = useState({
-    State: "",
+    State: user[0]?.customer_state,
   });
   const [city, setCity] = useState({
-    City: "",
+    City: user[0]?.customer_city,
   });
 
   const CountryOptions = async (e) => {
@@ -29,12 +31,14 @@ const UpdateProfile = () => {
   }, []);
 
   let name1, value1;
-  const handleState = async (e) => {
+  const handleCountry = async (e) => {
     name1 = e.target.name;
     value1 = e.target.value;
 
     setCountry({ ...country, [name1]: value1 });
+  };
 
+  const StateOptions = async () => {
     try {
       const res = await fetch(`http://localhost:8001/getState`, {
         method: "POST",
@@ -43,7 +47,7 @@ const UpdateProfile = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          countryId: value1,
+          countryId: country.Country,
         }),
       });
       const getState = await res.json();
@@ -53,13 +57,27 @@ const UpdateProfile = () => {
     }
   };
 
+  useEffect(() => {
+    StateOptions();
+  }, [country.Country]);
+
   let name2, value2;
-  const handleCity = async (e) => {
+  const handleState = async (e) => {
     name2 = e.target.name;
     value2 = e.target.value;
 
     setState({ ...state, [name2]: value2 });
+  };
 
+  let name3, value3;
+  const handleCity = (e) => {
+    name3 = e.target.name;
+    value3 = e.target.value;
+
+    setCity({ ...city, [name3]: value3 });
+  };
+
+  const CityOptions = async () => {
     try {
       const res = await fetch(`http://localhost:8001/getCity`, {
         method: "POST",
@@ -68,7 +86,7 @@ const UpdateProfile = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          stateId: value2,
+          stateId: state.State,
         }),
       });
       const getCity = await res.json();
@@ -78,13 +96,9 @@ const UpdateProfile = () => {
     }
   };
 
-  let name3, value3;
-  const handleCityChange = (e) => {
-    name3 = e.target.name;
-    value3 = e.target.value;
-
-    setCity({ ...city, [name3]: value3 });
-  };
+  useEffect(() => {
+    CityOptions();
+  }, [state.State]);
 
   const [userData, setUserData] = useState({
     name: user[0]?.customer_name,
@@ -94,7 +108,6 @@ const UpdateProfile = () => {
     address: user[0]?.customer_address,
   });
 
-  console.log({ state, city, country });
   let name, value;
   const handleInputs = (e) => {
     name = e.target.name;
@@ -110,8 +123,6 @@ const UpdateProfile = () => {
     const { Country } = country;
     const { State } = state;
     const { City } = city;
-
-    console.log({ Country, State, City });
 
     let countryName = countryOptions?.data?.find(
       (o) => o.country_id == Country
@@ -143,6 +154,7 @@ const UpdateProfile = () => {
     if (res.status === 400 || !response) {
       window.alert(response.message);
     } else if (res.status === 200) {
+      await fetchUser();
       navigate("/user-profile");
     }
   };
@@ -214,10 +226,9 @@ const UpdateProfile = () => {
                         id="Country"
                         name="Country"
                         value={country.Country}
-                        onChange={handleState}
+                        onChange={handleCountry}
                         className="form-control"
                       >
-                        <option value="">Select Country</option>
                         {countryOptions?.data?.map((val, index) => {
                           if (!val) return null;
 
@@ -241,9 +252,8 @@ const UpdateProfile = () => {
                         name="State"
                         value={state.State}
                         className="form-control"
-                        onChange={handleCity}
+                        onChange={handleState}
                       >
-                        <option value="">Select State</option>
                         {stateOptions?.data?.map((val, index) => {
                           if (!val) return null;
 
@@ -267,9 +277,8 @@ const UpdateProfile = () => {
                         name="City"
                         className="form-control"
                         value={city.City}
-                        onChange={handleCityChange}
+                        onChange={handleCity}
                       >
-                        <option value="">Select City</option>
                         {cityOptions?.data?.map((val, index) => {
                           if (!val) return null;
 

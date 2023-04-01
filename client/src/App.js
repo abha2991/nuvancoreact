@@ -5,7 +5,7 @@ import Career from "./Pages/Career";
 import Contact from "./Pages/Contact";
 import Blog from "./Pages/Blog";
 import Test from "./Component/Test";
-import StartProject from "./Pages/StartProject";
+import StartProject from "./Component/UserDashboard/UserForm/StartProject";
 import { Navigate, Route, Routes } from "react-router-dom";
 import useUser from "./hooks/useUser";
 import React from "react";
@@ -19,12 +19,17 @@ import UserProfileUpdate from "./Pages/UserProfileUpdate";
 import UserUploadImage from "./Pages/UserUploadImage";
 import Logout from "./Component/Logout";
 import ConstructionDetails from "./Component/ConstructionDetails1";
+import ConstructionDetails1 from "./Component/ConstructionDetails1";
+import ConstructionDetails4 from "./Component/ConstructionDetails4";
+import Com from "./Component/Com";
+
 function App() {
   const { initializing } = useUser();
 
   if (initializing) {
     return <>Loading...</>;
   }
+
   return (
     <>
       {/*<AuthRoute disallow={["/start-project"]} />*/}
@@ -33,7 +38,9 @@ function App() {
         <Route path={"*"} element={<Navigate to={"/"} />} />
         <Route path={"/start-project"} element={<StartProject />} />
         <Route path={"/"} element={<Home />} />
-
+        <Route path={"/construction"} element={<ConstructionDetails1 />} />
+        <Route path={"/con"} element={<ConstructionDetails4 />} />
+        <Route path={"/com"} element={<Com />} />
         <Route path={"/about"} element={<About />} />
         <Route path={"/career"} element={<Career />} />
         <Route path={"/contact"} element={<Contact />} />

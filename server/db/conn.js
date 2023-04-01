@@ -17,7 +17,7 @@ connection.connect(function (err) {
 });
 
 connection.query(
-  "SELECT * FROM property_details",
+  "SELECT * FROM additional_details",
   function (error, results, fields) {
     if (error) throw error;
 

@@ -11,9 +11,8 @@ router.use(express.json());
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const id = req.id;
-
-    let dir = "./uploads/ProfileImage";
+    // let dir = "./uploads/ProfileImage";
+    let dir = "uploads/" + req.params.type;
 
     try {
       if (!fs.existsSync(dir)) {
@@ -39,9 +38,17 @@ router.get("/user-logout", user.logout);
 router.post("/user-input", user.userInput);
 router.post("/user-basic-details", user.basicDetails);
 router.post("/user-property-details", user.propertyDetails);
+router.post(
+  "/user-additional-details/:type",
+  authenticateUser,
+  upload.single("file"),
+  user.additionalDetails
+);
+
+router.post("/data", user.data);
 router.post("/user-update-profile", authenticateUser, user.updateUserProfile);
 router.post(
-  "/user-update-profilepic",
+  "/user-update-profilepic/:type",
   authenticateUser,
   upload.single("file"),
   user.uploadProfilePicture

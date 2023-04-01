@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import useUser from "../hooks/useUser";
+import useUser from "../../../hooks/useUser";
 import ConstructionDetails from "./ConstructionDetails";
-import AdditionalDetails from "./AdditionalDetails";
-import Com from "./Com";
 
 const PropertyDetails = (props) => {
   const { user } = useUser();
@@ -431,8 +429,8 @@ const PropertyDetails = (props) => {
           </div>
         </div>
       </div>
-      {/*<ConstructionDetails basicId={props.basicId} propertId={propertyId} />*/}
-      <Com basicId={props.basicId} propertId={propertyId} />
+
+      <ConstructionDetails basicId={props.basicId} propertId={propertyId} />
     </>
   );
 };

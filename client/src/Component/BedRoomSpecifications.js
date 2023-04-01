@@ -40,6 +40,8 @@ const BedRoomSpecifications = (props) => {
       return [...existing];
     });
   };
+
+  console.log(props.bedRoomNo);
   useEffect(() => {
     for (let i = 1; i < props.bedRoomNo; i++) {
       setData((existing) => [...existing, specifications]);
