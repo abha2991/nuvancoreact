@@ -26,7 +26,34 @@ const PropertyDetails = (props) => {
     setPropertyDetails({ ...propertyDetails, [name1]: value1 });
   };
 
+  const saveDetails = () => {
+    console.log({ propertyDetails });
+    let elementSize1 = document.getElementById("dimension-top");
+    let elementName1 = document.getElementById("dimension-drop-top");
+    elementSize1.value = propertyDetails.topSize;
+    elementName1.value = propertyDetails.topName;
+    let elementSize2 = document.getElementById("dimension-right");
+    let elementName2 = document.getElementById("dimension-drop-right");
+    elementSize2.value = propertyDetails.rightSize;
+    elementName2.value = propertyDetails.rightName;
+    let elementSize3 = document.getElementById("dimension-bottom");
+    let elementName3 = document.getElementById("dimension-drop-bottom");
+    elementSize3.value = propertyDetails.bottomSize;
+    elementName3.value = propertyDetails.bottomName;
+    let elementSize4 = document.getElementById("dimension-left");
+    let elementName4 = document.getElementById("dimension-drop-left");
+    elementSize4.value = propertyDetails.leftSize;
+    elementName4.value = propertyDetails.leftName;
+    let element5 = document.getElementById("direction-property");
+    element5.value = propertyDetails.streetFacing;
+
+    let save = document.getElementById("save");
+    save.setAttribute("data-dismiss", "modal");
+    save.click();
+  };
   const getPropertyDetails = async () => {
+    let element = document.querySelector("#myTab > li:nth-child(2) > a");
+    let element1 = document.querySelector("#myTab > li:nth-child(3) > a");
     const {
       topSize,
       topName,
@@ -68,7 +95,10 @@ const PropertyDetails = (props) => {
     if (res.status === 400 || !response) {
       window.alert(response.message);
     } else if (res.status === 200) {
+      element.classList.add("check-icon", "active");
+
       window.alert(response.message);
+      element1.click();
     }
   };
   return (
@@ -99,7 +129,7 @@ const PropertyDetails = (props) => {
               aria-describedby="emailHelp"
               placeholder="30"
               name="topSize"
-              value={propertyDetails.topSize}
+              //value={propertyDetails.topSize}
               disabled="true"
               // onChange={handlePropertyDetails}
             />
@@ -110,7 +140,7 @@ const PropertyDetails = (props) => {
               aria-describedby="emailHelp"
               placeholder="Property"
               name="topName"
-              value={propertyDetails.topName}
+              //value={propertyDetails.topName}
               disabled="true"
               // onChange={handlePropertyDetails}
             />
@@ -137,7 +167,7 @@ const PropertyDetails = (props) => {
               aria-describedby="emailHelp"
               placeholder="30"
               name="rightSize"
-              value={propertyDetails.rightSize}
+              //value={propertyDetails.rightSize}
               //onChange={handlePropertyDetails}
               disabled="true"
             />
@@ -148,7 +178,7 @@ const PropertyDetails = (props) => {
               aria-describedby="emailHelp"
               placeholder="Property"
               name="rightName"
-              value={propertyDetails.rightName}
+              //value={propertyDetails.rightName}
               // onChange={handlePropertyDetails}
               disabled="true"
             />
@@ -175,7 +205,7 @@ const PropertyDetails = (props) => {
               aria-describedby="emailHelp"
               placeholder="30"
               name="bottomSize"
-              value={propertyDetails.bottomSize}
+              //value={propertyDetails.bottomSize}
               //onChange={handlePropertyDetails}
               disabled="true"
             />
@@ -186,7 +216,7 @@ const PropertyDetails = (props) => {
               aria-describedby="emailHelp"
               placeholder="Property"
               name="bottomName"
-              value={propertyDetails.bottomName}
+              //value={propertyDetails.bottomName}
               //onChange={handlePropertyDetails}
               disabled="true"
             />
@@ -213,7 +243,7 @@ const PropertyDetails = (props) => {
               aria-describedby="emailHelp"
               placeholder="30"
               name="leftSize"
-              value={propertyDetails.leftSize}
+              //value={propertyDetails.leftSize}
               disabled="true"
               // onChange={handlePropertyDetails}
             />
@@ -224,7 +254,7 @@ const PropertyDetails = (props) => {
               aria-describedby="emailHelp"
               placeholder="Property"
               name="leftName"
-              value={propertyDetails.leftName}
+              //value={propertyDetails.leftName}
               disabled="true"
               // onChange={handlePropertyDetails}
             />
@@ -250,7 +280,7 @@ const PropertyDetails = (props) => {
             placeholder="North"
             disabled
             name="streetFacing"
-            value={propertyDetails.streetFacing}
+            // value={propertyDetails.streetFacing}
             //onChange={handlePropertyDetails}
             disbaled="true"
           />
@@ -309,7 +339,14 @@ const PropertyDetails = (props) => {
               </h2>
             </div>
             <div className="modal-body">
-              <input className="fill-value-posab" type="button" value="Save" />
+              {/*<input className="fill-value-posab" type="button" value="Save" />*/}
+              <button
+                className="fill-value-posab"
+                id="save"
+                onClick={saveDetails}
+              >
+                Save
+              </button>
               <button
                 type="button"
                 className="close mocl"
@@ -429,8 +466,6 @@ const PropertyDetails = (props) => {
           </div>
         </div>
       </div>
-
-      <ConstructionDetails basicId={props.basicId} propertId={propertyId} />
     </>
   );
 };

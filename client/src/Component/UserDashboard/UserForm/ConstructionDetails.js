@@ -49,7 +49,7 @@ const Floor = {
 };
 
 const bedroom = {
-  type: null,
+  type: BedroomType,
   bathroom: false,
   balcony: false,
   dressingArea: false,
@@ -128,7 +128,9 @@ function BedroomComponent({ floorIndex, bedroomIndex }) {
             </div>
             <input
               type="radio"
-              {...register(`floors.${floorIndex}.bedrooms.${bedroomIndex}`)}
+              {...register(
+                `floors.${floorIndex}.bedrooms.${bedroomIndex}.type`
+              )}
               value={BedroomType.Luxury}
             />
           </div>
@@ -140,7 +142,9 @@ function BedroomComponent({ floorIndex, bedroomIndex }) {
             </div>
             <input
               type="radio"
-              {...register(`floors.${floorIndex}.bedrooms.${bedroomIndex}`)}
+              {...register(
+                `floors.${floorIndex}.bedrooms.${bedroomIndex}.type`
+              )}
               value={BedroomType.Cozy}
             />
           </div>
@@ -151,7 +155,9 @@ function BedroomComponent({ floorIndex, bedroomIndex }) {
             </div>
             <input
               type="radio"
-              {...register(`floors.${floorIndex}.bedrooms.${bedroomIndex}`)}
+              {...register(
+                `floors.${floorIndex}.bedrooms.${bedroomIndex}.type`
+              )}
               value={BedroomType.Normal}
             />
           </div>
@@ -162,7 +168,9 @@ function BedroomComponent({ floorIndex, bedroomIndex }) {
             </div>
             <input
               type="radio"
-              {...register(`floors.${floorIndex}.bedrooms.${bedroomIndex}`)}
+              {...register(
+                `floors.${floorIndex}.bedrooms.${bedroomIndex}.type`
+              )}
               value={BedroomType.Tight}
             />
           </div>
@@ -339,16 +347,19 @@ function FloorComponent({ floorIndex }) {
 }
 
 export default function ConstructionDetails(props) {
+  const { user } = useUser();
   const methods = useForm();
   const floorMethods = useFieldArray({
     name: "floors",
     control: methods?.control,
   });
   let basicId = props.basicId;
-  let propertyId = props.propertId;
+  let customerId = user[0]?.customer_id;
 
   const onSubmit = async (data) => {
-    const res = await fetch("http://localhost:8001/data", {
+    let element = document.querySelector("#myTab > li:nth-child(3) > a");
+    let element1 = document.querySelector("#myTab > li.nav-item.lstli > a");
+    const res = await fetch("http://localhost:8001/user-construction-details", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -357,10 +368,17 @@ export default function ConstructionDetails(props) {
       body: JSON.stringify({
         data,
         basicId,
-        propertyId,
+        customerId,
       }),
     });
     const response = await res.json();
+    if (res.status === 400 || !response) {
+      window.alert(response.message);
+    } else if (res.status === 200) {
+      element.classList.add("check-icon");
+      window.alert(response.message);
+      element1.click();
+    }
   };
   const changeFloors = (event) => {
     const floorCount = parseInt(event.target.value, 10);
@@ -423,9 +441,4 @@ export default function ConstructionDetails(props) {
       </FormProvider>
     </div>
   );
-}
-
-function NestedInput() {
-  const { register } = useFormContext(); // retrieve all hook methods
-  return <input {...register("test")} />;
 }

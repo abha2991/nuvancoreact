@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import useUser from "../../../hooks/useUser";
 import PropertyDetails from "./PropertyDetails";
 import AdditionalDetails from "./AdditionalDetails";
+import ConstructionDetails from "./ConstructionDetails";
+import { useNavigate } from "react-router";
 
 const BasicDetails = () => {
   const { user } = useUser();
+
+  const navigate = useNavigate();
 
   const [basicId, setBasicId] = useState();
   const [basicDetails, setBasicDetails] = useState({
@@ -24,6 +28,8 @@ const BasicDetails = () => {
 
   const getBasicDetails = async () => {
     const { location, city, startPlanning, propertyStatus } = basicDetails;
+    let element = document.querySelector("#myTab > li:nth-child(1) > a");
+    let element1 = document.querySelector("#myTab > li:nth-child(2) > a");
 
     const res = await fetch("http://localhost:8001/user-basic-details", {
       method: "POST",
@@ -41,12 +47,13 @@ const BasicDetails = () => {
     });
     const response = await res.json();
     setBasicId(response?.id);
-    console.log(response?.id);
 
     if (res.status === 400 || !response) {
       window.alert(response.message);
     } else if (res.status === 200) {
+      element.classList.add("check-icon");
       window.alert(response.message);
+      element1.click();
     }
   };
   return (
@@ -102,11 +109,13 @@ const BasicDetails = () => {
                 onChange={handleBasicDetails}
                 required
               >
-                <option>Immediate</option>
-                <option>Within 1 Month</option>
-                <option>1 - 3 Months</option>
-                <option>3 - 6 Months</option>
-                <option>6 Months - 1 Year</option>
+                <option value="">Select</option>
+
+                <option value="Immediate">Immediate</option>
+                <option value="Within 1 Month">Within 1 Month</option>
+                <option value="1 - 3 Months">1 - 3 Months</option>
+                <option value="3 - 6 Months">3 - 6 Months</option>
+                <option value="6 Months - 1 Year">6 Months - 1 Year</option>
               </select>
             </div>
             <div className="form-group">
@@ -122,8 +131,9 @@ const BasicDetails = () => {
                 onChange={handleBasicDetails}
                 required
               >
-                <option>Owned</option>
-                <option>Exploring</option>
+                <option value="">Select</option>
+                <option value="Owned">Owned</option>
+                <option value="Exploring">Exploring</option>
               </select>
             </div>
             <button
@@ -137,8 +147,9 @@ const BasicDetails = () => {
           </div>
 
           <PropertyDetails basicId={basicId} />
-
+          <ConstructionDetails basicId={basicId} />
           <AdditionalDetails basicId={basicId} />
+
           <div className="clearfix"></div>
         </div>
       </div>

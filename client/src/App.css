@@ -3090,6 +3090,22 @@ input.fill-value-posab {
   max-width: 160px;
   margin: 0 auto;
 }
+
+.fill-value-posab {
+  font-weight: 600;
+  position: absolute;
+  bottom: 20px;
+  background: #e55922;
+  border: 0;
+  color: #fff;
+  border-radius: 4px;
+  padding: 10px 10px;
+  left: 0;
+  right: 0;
+  max-width: 160px;
+  margin: 0 auto;
+}
+
 .input-sec {
   display: flex;
   justify-content: space-between;

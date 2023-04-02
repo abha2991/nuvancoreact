@@ -14,7 +14,7 @@ const Dashboard = () => {
                 fontWeight: "600",
               }}
             >
-              <a href="/test" className="btn btn-danger">
+              <a href="/start-project" className="btn btn-danger">
                 {" "}
                 Start Your Project{" "}
                 <i className="fa fa-fast-forward" aria-hidden="true"></i>{" "}

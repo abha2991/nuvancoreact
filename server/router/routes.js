@@ -35,7 +35,7 @@ router.post("/user-register", user.register);
 router.post("/user-login", user.login);
 router.get("/is-user-loggedIn", authenticateUser, user.isUserLoggedIn);
 router.get("/user-logout", user.logout);
-router.post("/user-input", user.userInput);
+
 router.post("/user-basic-details", user.basicDetails);
 router.post("/user-property-details", user.propertyDetails);
 router.post(
@@ -45,7 +45,9 @@ router.post(
   user.additionalDetails
 );
 
-router.post("/data", user.data);
+router.post("/user-get-details", user.getDetails);
+
+router.post("/user-construction-details", user.constructionDetails);
 router.post("/user-update-profile", authenticateUser, user.updateUserProfile);
 router.post(
   "/user-update-profilepic/:type",

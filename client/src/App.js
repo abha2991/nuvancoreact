@@ -18,10 +18,7 @@ import UserProfile from "./Pages/UserProfile";
 import UserProfileUpdate from "./Pages/UserProfileUpdate";
 import UserUploadImage from "./Pages/UserUploadImage";
 import Logout from "./Component/Logout";
-import ConstructionDetails from "./Component/ConstructionDetails1";
-import ConstructionDetails1 from "./Component/ConstructionDetails1";
-import ConstructionDetails4 from "./Component/ConstructionDetails4";
-import Com from "./Component/Com";
+import UserDetails from "./Component/UserDashboard/UserDetails";
 
 function App() {
   const { initializing } = useUser();
@@ -38,9 +35,7 @@ function App() {
         <Route path={"*"} element={<Navigate to={"/"} />} />
         <Route path={"/start-project"} element={<StartProject />} />
         <Route path={"/"} element={<Home />} />
-        <Route path={"/construction"} element={<ConstructionDetails1 />} />
-        <Route path={"/con"} element={<ConstructionDetails4 />} />
-        <Route path={"/com"} element={<Com />} />
+        <Route path={"/user-details"} element={<UserDetails />} />
         <Route path={"/about"} element={<About />} />
         <Route path={"/career"} element={<Career />} />
         <Route path={"/contact"} element={<Contact />} />

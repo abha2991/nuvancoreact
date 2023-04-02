@@ -17,6 +17,7 @@ const AdditionalDetails = (props) => {
   };
 
   const getAdditionalDetails = async () => {
+    let element = document.querySelector("#myTab > li:nth-child(4) > a");
     const formData = new FormData();
     let inputFile = inputRef?.current?.files[0];
 
@@ -50,6 +51,7 @@ const AdditionalDetails = (props) => {
     if (res.status === 400 || !response) {
       window.alert(response.message);
     } else if (res.status === 200) {
+      element.classList.add("check-icon", "active");
       window.alert(response.message);
     }
   };

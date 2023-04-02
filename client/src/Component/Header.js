@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import useUser from "../hooks/useUser";
 import { useQuery } from "react-query";
+import Login from "./Login";
 
 const Header = () => {
   const { user } = useUser();
@@ -48,38 +49,40 @@ const Header = () => {
     setData({ ...data, [name1]: value1 });
   };
 
-  const login = async (e) => {
-    e.preventDefault();
-    let element = document.getElementById("login");
-    element.setAttribute("data-dismiss", "modal");
-
-    console.log({ element });
-
-    const { email, password } = data;
-
-    const res = await fetch("http://localhost:8001/user-login", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
-    const response = await res.json();
-
-    if (res.status === 400 || !response) {
-      window.alert(response.message);
-    } else if (res.status === 200) {
-      window.alert("Logged In Successfully");
-
-      await fetchUser();
-      window.location.reload();
-      // navigate("/dashboard");
-    }
-  };
+  // const login = async (e) => {
+  //   e.preventDefault();
+  //   let element = document.getElementById("login");
+  //   element.setAttribute("data-dismiss", "modal");
+  //
+  //   console.log({ element });
+  //
+  //   const { email, password } = data;
+  //
+  //   const res = await fetch("http://localhost:8001/user-login", {
+  //     method: "POST",
+  //     credentials: "include",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       email,
+  //       password,
+  //     }),
+  //   });
+  //   const response = await res.json();
+  //
+  //   if (res.status === 400 || !response) {
+  //     window.alert(response.message);
+  //   } else if (res.status === 200) {
+  //     window.alert("Logged In Successfully");
+  //
+  //     await fetchUser();
+  //     let save = document.getElementById("save");
+  //     save.setAttribute("data-dismiss", "modal");
+  //     save.click();
+  //     navigate("/dashboard");
+  //   }
+  // };
 
   const register = async (e) => {
     e.preventDefault();
@@ -111,8 +114,6 @@ const Header = () => {
   const startProject = () => {
     alert("Please Login First!!!");
   };
-
-  console.log({ user });
 
   if (user) {
     return (
@@ -202,82 +203,87 @@ const Header = () => {
               </button>
             </div>
 
-            <div className="modal-body in-lgin">
-              <div className="row justify-content-space-between">
-                <div className="left-detils-login col-lg-5">
-                  <h2>Hello Again!</h2>
-                  <p>To keep connected with please login for best experience</p>
-                </div>
-                <div className="right-login-form col-lg-7">
-                  <img src={Logo} alt="" />
-                  <form onSubmit={login}>
-                    <div className="form-outline mb-4">
-                      <label className="form-label" htmlFor="form2Example1">
-                        Email address
-                      </label>
-                      <input
-                        type="email"
-                        className="form-control"
-                        name="email"
-                        value={data.email}
-                        onChange={handleInputs}
-                      />
-                    </div>
+            <Login />
 
-                    <div className="form-outline mb-4">
-                      <label className="form-label" htmlFor="form2Example2">
-                        Password
-                      </label>
-                      <input
-                        type="password"
-                        id="form2Example2"
-                        className="form-control"
-                        name="password"
-                        value={data.password}
-                        onChange={handleInputs}
-                      />
-                    </div>
+            {/*<div className="modal-body in-lgin">*/}
+            {/*  <div className="row justify-content-space-between">*/}
+            {/*    <div className="left-detils-login col-lg-5">*/}
+            {/*      <h2>Hello Again!</h2>*/}
+            {/*      <p>To keep connected with please login for best experience</p>*/}
+            {/*    </div>*/}
+            {/*    <div className="right-login-form col-lg-7">*/}
+            {/*      <img src={Logo} alt="" />*/}
+            {/*      <form onSubmit={login}>*/}
+            {/*        <div className="form-outline mb-4">*/}
+            {/*          <label className="form-label" htmlFor="form2Example1">*/}
+            {/*            Email address*/}
+            {/*          </label>*/}
+            {/*          <input*/}
+            {/*            type="email"*/}
+            {/*            className="form-control"*/}
+            {/*            required*/}
+            {/*            name="email"*/}
+            {/*            value={data.email}*/}
+            {/*            onChange={handleInputs}*/}
+            {/*          />*/}
+            {/*        </div>*/}
 
-                    <div className="row mb-4">
-                      <div className="col d-flex justify-content-center"></div>
+            {/*        <div className="form-outline mb-4">*/}
+            {/*          <label className="form-label" htmlFor="form2Example2">*/}
+            {/*            Password*/}
+            {/*          </label>*/}
+            {/*          <input*/}
+            {/*            type="password"*/}
+            {/*            id="form2Example2"*/}
+            {/*            required*/}
+            {/*            className="form-control"*/}
+            {/*            name="password"*/}
+            {/*            value={data.password}*/}
+            {/*            onChange={handleInputs}*/}
+            {/*          />*/}
+            {/*        </div>*/}
 
-                      <div className="col-lg-7 text-right">
-                        <a
-                          className="forgot-modal"
-                          data-target="#forgot-password"
-                          data-toggle="modal"
-                          href="#!"
-                        >
-                          Forgot password?
-                        </a>
-                      </div>
-                    </div>
+            {/*        <div className="row mb-4">*/}
+            {/*          <div className="col d-flex justify-content-center"></div>*/}
 
-                    <button
-                      type="submit"
-                      className="btn btn-primary btn-block mb-4"
-                    >
-                      Login
-                    </button>
+            {/*          <div className="col-lg-7 text-right">*/}
+            {/*            <a*/}
+            {/*              className="forgot-modal"*/}
+            {/*              data-target="#forgot-password"*/}
+            {/*              data-toggle="modal"*/}
+            {/*              href="#!"*/}
+            {/*            >*/}
+            {/*              Forgot password?*/}
+            {/*            </a>*/}
+            {/*          </div>*/}
+            {/*        </div>*/}
 
-                    <div className="text-center bottom-sin">
-                      <p>
-                        Don’t have an account?{" "}
-                        <a
-                          className="signup-mod"
-                          data-target="#signUp"
-                          data-dismiss="modal"
-                          data-toggle="modal"
-                          href="#!"
-                        >
-                          Sign Up
-                        </a>
-                      </p>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
+            {/*        <button*/}
+            {/*          id="save"*/}
+            {/*          type="submit"*/}
+            {/*          className="btn btn-primary btn-block mb-4"*/}
+            {/*        >*/}
+            {/*          Login*/}
+            {/*        </button>*/}
+
+            {/*        <div className="text-center bottom-sin">*/}
+            {/*          <p>*/}
+            {/*            Don’t have an account?{" "}*/}
+            {/*            <a*/}
+            {/*              className="signup-mod"*/}
+            {/*              data-target="#signUp"*/}
+            {/*              data-dismiss="modal"*/}
+            {/*              data-toggle="modal"*/}
+            {/*              href="#!"*/}
+            {/*            >*/}
+            {/*              Sign Up*/}
+            {/*            </a>*/}
+            {/*          </p>*/}
+            {/*        </div>*/}
+            {/*      </form>*/}
+            {/*    </div>*/}
+            {/*  </div>*/}
+            {/*</div>*/}
           </div>
         </div>
       </div>
@@ -386,6 +392,7 @@ const Header = () => {
                               required=""
                               className="form-control"
                               name="user_name"
+                              required
                               value={data.user_name}
                               onChange={handleRegistrationInputs}
                             />
@@ -404,7 +411,7 @@ const Header = () => {
                             <input
                               type="email"
                               id="customer_email"
-                              required=""
+                              required
                               className="form-control"
                               name="user_email"
                               value={data.user_email}

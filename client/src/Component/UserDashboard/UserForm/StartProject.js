@@ -7,6 +7,7 @@ import useUser from "../../../hooks/useUser";
 import Footer from "../../Footer";
 
 import BasicDetails from "./BasicDetails";
+import ConstructionDetails from "./ConstructionDetails";
 
 const StartProject = () => {
   const { user } = useUser();
@@ -44,7 +45,7 @@ const StartProject = () => {
                 <li role="presentation" className="nav-item">
                   <a
                     href="#step1"
-                    className="nav-link active st1 check-icon"
+                    className="nav-link active st1"
                     data-toggle="tab"
                     aria-controls="step1"
                     role="tab"
