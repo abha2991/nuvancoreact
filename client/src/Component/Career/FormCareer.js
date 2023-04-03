@@ -1,17 +1,9 @@
 import React from "react";
 
-import styled, { keyframes } from "styled-components";
-import { bounceInUp } from "react-animations";
-
 import "animate.css/animate.min.css";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 
 const FormCareer = () => {
-  const bounceAnimation = keyframes`${bounceInUp}`;
-
-  const BouncyDiv = styled.div`
-    animation: 3s ${bounceAnimation};
-  `;
   return (
     <div className="contactForm seactionPadding seactionPaddinggggg">
       <div className="container">

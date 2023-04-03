@@ -10,9 +10,6 @@ const WhyJoin = () => {
           animateIn="animate__fadeInLeft"
           className="col-md-12 cont-car wow slideInLeft"
           style={{ visibility: "visible" }}
-          // data-aos="slide-right"
-          // data-offset="200"
-          // data-aos-easing="linear"
         >
           <h2>
             Why <mark className="banner-con">Join NuvanCo Family!</mark>{" "}

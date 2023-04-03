@@ -1,6 +1,4 @@
 import React from "react";
-import { fadeInLeft, fadeInRight } from "react-animations";
-import styled, { keyframes } from "styled-components";
 
 import "animate.css/animate.min.css";
 import { AnimationOnScroll } from "react-animation-on-scroll";

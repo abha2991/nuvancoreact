@@ -213,6 +213,13 @@ section#counter-stats {
 .banner-details {
   padding: 80px 0 !important;
 }
+
+.btn-primary.focus,
+.btn-primary:focus {
+  color: black !important;
+
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+}
 .btn-primary:hover {
   color: #fff;
   background-color: #e1470b !important;

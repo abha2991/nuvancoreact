@@ -1,9 +1,7 @@
 import React from "react";
 import Counter from "./Counter";
 import BannerImage from "../images/about-banner.jpg";
-import Banner1 from "../images/bg-consult.png";
-import { render } from "react-dom";
-import CountUp from "react-countup";
+
 import "animate.css/animate.min.css";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 const Banner = () => {

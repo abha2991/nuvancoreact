@@ -1,5 +1,8 @@
 import React from "react";
-import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
+import career from "../images/career-ab-bg.png";
+import career1 from "../images/caree-point.png";
+import career2 from "../images/carrer-banner.png";
+import Carousel from "react-bootstrap/Carousel";
 
 const WhyChoose = () => {
   setInterval(() => {
@@ -11,39 +14,33 @@ const WhyChoose = () => {
 
     let heading3 = document.getElementById("head3")?.classList;
     let progress3 = document.getElementsByClassName("inProgress3");
-    let link1 = document.querySelector('[data-mdb-target="0"]');
+    let link1 = document.querySelector('[aria-label="Slide 1"]');
 
-    let link2 = document.querySelector('[data-mdb-target="1"]');
-    let link3 = document.querySelector('[data-mdb-target="2"]');
+    let link2 = document.querySelector('[aria-label="Slide 2"]');
+    let link3 = document.querySelector('[aria-label="Slide 3"]');
 
     if (link1?.classList?.contains("active")) {
-      heading1.add("yellow-text");
-      progress1[0].classList.add("inProgress");
-      progress1[0].classList.add("widthTransition");
+      heading1?.add("yellow-text");
+      progress1?.[0]?.classList?.add("inProgress", "widthTransition");
     } else {
       heading1?.remove("yellow-text");
-      progress1[0]?.classList?.remove("inProgress");
-      progress1[0]?.classList?.remove("widthTransition");
+      progress1?.[0]?.classList?.remove("inProgress", "widthTransition");
     }
 
     if (link2?.classList?.contains("active")) {
-      heading2.add("yellow-text");
-      progress2[0].classList.add("inProgress");
-      progress2[0].classList.add("widthTransition");
+      heading2?.add("yellow-text");
+      progress2?.[0].classList?.add("inProgress", "widthTransition");
     } else {
       heading2?.remove("yellow-text");
-      progress2[0]?.classList?.remove("inProgress");
-      progress2[0]?.classList?.remove("widthTransition");
+      progress2?.[0]?.classList?.remove("inProgress", "widthTransition");
     }
 
     if (link3?.classList?.contains("active")) {
-      heading3.add("yellow-text");
-      progress3[0].classList.add("inProgress");
-      progress3[0].classList.add("widthTransition");
+      heading3?.add("yellow-text");
+      progress3?.[0].classList?.add("inProgress", "widthTransition");
     } else {
       heading3?.remove("yellow-text");
-      progress3[0]?.classList?.remove("inProgress");
-      progress3[0]?.classList?.remove("widthTransition");
+      progress3?.[0]?.classList?.remove("inProgress", "widthTransition");
     }
   }, 0);
 
@@ -54,29 +51,31 @@ const WhyChoose = () => {
           <div className="sliderContainer dots-whychoose">
             <div className="row">
               <div className="col-6">
-                <div className="slider single-item">
-                  <MDBCarousel showIndicators dark fade dealy={3000}>
-                    <MDBCarouselItem
+                <Carousel controls={false}>
+                  <Carousel.Item interval={5000}>
+                    <img
                       className="w-100 d-block image-size"
-                      itemId={1}
-                      src={require("../images/caree-point.png")}
-                      alt="..."
-                    ></MDBCarouselItem>
-                    <MDBCarouselItem
+                      src={career}
+                      alt="First slide"
+                    />
+                  </Carousel.Item>
+                  <Carousel.Item interval={5000}>
+                    <img
                       className="w-100 d-block image-size"
-                      itemId={2}
-                      src={require("../images/career-ab-bg.png")}
-                      alt="..."
-                    ></MDBCarouselItem>
-
-                    <MDBCarouselItem
+                      style={{ height: "200px", width: "200px" }}
+                      src={career1}
+                      alt="Second slide"
+                    />
+                  </Carousel.Item>
+                  <Carousel.Item interval={5000}>
+                    <img
                       className="w-100 d-block image-size"
-                      itemId={3}
-                      src={require("../images/carrer-banner.png")}
-                      alt="..."
-                    ></MDBCarouselItem>
-                  </MDBCarousel>
-                </div>
+                      style={{ height: "200px", width: "200px" }}
+                      src={career2}
+                      alt="Third slide"
+                    />
+                  </Carousel.Item>
+                </Carousel>
               </div>
               <div className="col-6">
                 <div className="progressBarContainer">
