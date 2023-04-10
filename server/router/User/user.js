@@ -90,103 +90,6 @@ module.exports.register = async (req, res, next) => {
   }
 };
 
-// module.exports.register = async (req, res) => {
-//   try {
-//     const { name, email, password, phoneNumber } = req.body;
-//
-//     const hashedPassword = await bcrypt.hash(password, 12);
-//
-//     if (!name || !email || !password || !phoneNumber) {
-//       return res
-//         .status(400)
-//         .json({ status: "failed", message: "Plz fill the fields properly" });
-//     } else if (name.length < 3) {
-//       return res
-//         .status(400)
-//         .json({ status: "failed", message: "Name Length is Too Short" });
-//     } else if (phoneNumber.length < 10 || phoneNumber.length > 11) {
-//       return res.status(400).json({
-//         status: "failed",
-//         message: "Please Enter Correct Phone Number",
-//       });
-//     } else if (name && email && password) {
-//       await connection.query(
-//         `Select * FROM customer_masters`,
-//         function (error, results, fields) {
-//           if (error) throw error;
-//
-//           if (results.length == 0) {
-//             connection.query(
-//               "INSERT INTO `customer_masters`(`customer_registration_id`,`customer_name`,`customer_email`,`customer_password`,`customer_mobile`,`created_at`,`customer_otp`,`customer_company_name`,`customer_photo`,`customer_approval_remark`,`customer_fcm`,`uuid`,`customer_country`,`customer_state`,`customer_city`,`customer_zipcode`,`customer_address`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-//               [
-//                 "",
-//                 name,
-//                 email,
-//                 hashedPassword,
-//                 phoneNumber,
-//                 new Date(),
-//                 0,
-//                 "",
-//                 "",
-//                 "",
-//                 "",
-//                 "",
-//                 0,
-//                 0,
-//                 "",
-//                 "",
-//                 "",
-//               ]
-//             );
-//             return res.status(200).json({
-//               status: "success",
-//               message: "Registered Successfully",
-//             });
-//           } else {
-//             results.forEach((result) => {
-//               if (result.customer_email === email) {
-//                 return res
-//                   .status(400)
-//                   .json({ status: "failed", message: "Email already present" });
-//               } else {
-//                 connection.query(
-//                   "INSERT INTO `customer_masters`(`customer_registration_id`,`customer_name`,`customer_email`,`customer_password`,`customer_mobile`,`created_at`,`customer_otp`,`customer_company_name`,`customer_photo`,`customer_approval_remark`,`customer_fcm`,`uuid`,`customer_country`,`customer_state`,`customer_city`,`customer_zipcode`,`customer_address`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-//                   [
-//                     "",
-//                     name,
-//                     email,
-//                     hashedPassword,
-//                     phoneNumber,
-//                     new Date(),
-//                     0,
-//                     "",
-//                     "",
-//                     "",
-//                     "",
-//                     "",
-//                     0,
-//                     0,
-//                     "",
-//                     "",
-//                     "",
-//                   ]
-//                 );
-//
-//                 return res.status(200).json({
-//                   status: "success",
-//                   message: "Registered Successfully",
-//                 });
-//               }
-//             });
-//           }
-//         }
-//       );
-//     }
-//   } catch (error) {
-//     res.send(error);
-//   }
-// };
-
 module.exports.login = async (req, res, next) => {
   const { email, password } = req.body;
   connection.query(
@@ -244,79 +147,6 @@ module.exports.login = async (req, res, next) => {
     }
   );
 };
-
-// module.exports.login = async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-//     let a = await bcrypt.hash(password, 12);
-//
-//     if (!email) {
-//       return res
-//         .status(400)
-//         .json({ status: "failed", message: "Please Enter Email" });
-//     } else if (!password) {
-//       return res
-//         .status(400)
-//         .json({ status: "failed", message: "Please Enter Password" });
-//     } else if (email && password) {
-//       await connection.query(
-//         "Select * FROM customer_masters WHERE customer_email=?",
-//         [email],
-//         function (error, results, fields) {
-//           if (!results.length) {
-//             return res.status(400).json({
-//               status: "failed",
-//               message: "Invalid Email Address",
-//             });
-//           } else if (results) {
-//             results.forEach(async (result) => {
-//               if (!result) {
-//                 return res.status(400).json({
-//                   status: "failed",
-//                   message: "Invalid Email Address",
-//                 });
-//               } else {
-//                 let passwordConfirmation = await bcrypt.compare(
-//                   password,
-//                   result.customer_password
-//                 );
-//
-//                 if (!passwordConfirmation) {
-//                   return res.status(400).json({
-//                     status: "failed",
-//                     message: "Incorrect Password",
-//                   });
-//                 }
-//
-//                 if (passwordConfirmation) {
-//                   const token = jwt.sign(
-//                     { id: result.customer_id },
-//                     "yfgyesfg647373693683shdbcbdslbcj589u40u60476",
-//                     { expiresIn: "1800d" }
-//                   );
-//                   res.cookie("token", token, {
-//                     expires: new Date(Date.now() + 155520000000),
-//                     httpOnly: true,
-//                   });
-//                   result.token = token;
-//
-//                   return res.status(200).json({
-//                     status: "success",
-//                     data: result,
-//
-//                     message: "Logged In Successfully",
-//                   });
-//                 }
-//               }
-//             });
-//           }
-//         }
-//       );
-//     }
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
 
 module.exports.isUserLoggedIn = async (req, res) => {
   res.status(200).send(req?.user);
@@ -456,15 +286,17 @@ module.exports.propertyDetails = async (req, res) => {
   } = req.body;
 
   await connection.query(
-    `Select * FROM property_details`,
+    "Select * FROM property_details WHERE pd_basic_id=?",
+    [propertyDetailsBasicId],
     function (error, results, fields) {
       if (error) throw error;
 
-      connection.query(
-        "INSERT INTO `property_details`(`pd_customer_id`,`pd_basic_id`,`pd_top_size`,`pd_top_name`,`pd_right_size`,`pd_right_name`,`pd_bottom_size`,`pd_bottom_name`,`pd_left_size`,`pd_left_name`,`pd_street_facing`,`pd_built_area`,`created_at`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",
-        [
+      if (results.length > 0) {
+        let sql = `UPDATE property_details SET pd_customer_id = ?,pd_top_size = ?,pd_top_name=?, pd_right_size=?,pd_right_name=?,pd_bottom_size=?,pd_bottom_name=?,pd_left_size=?,pd_left_name=?,pd_street_facing=?,pd_built_area=?,updated_at=?
+           WHERE pd_basic_id = ?`;
+        let data = [
           propertyDetailsCustomerId,
-          propertyDetailsBasicId,
+
           topSize,
           topName,
           rightSize,
@@ -476,21 +308,123 @@ module.exports.propertyDetails = async (req, res) => {
           streetFacing,
           builtArea,
           new Date(),
-        ],
-        (err, result) => {
-          if (err) {
-            throw err;
-            return res.status(400).json({ status: "failed", message: err });
-          } else {
-            return res.status(200).json({
-              status: "success",
+          propertyDetailsBasicId,
+        ];
 
-              message: "Property Details Entered Successfully",
-              id: result.insertId,
-            });
+        connection.query(sql, data, (error, results, fields) => {
+          if (error) {
+            console.log({ error });
+            return res
+              .status(400)
+              .json({ status: "failed", message: "Something Went Wrong!!!" });
           }
-        }
-      );
+
+          connection.query(
+            "SELECT booking_status FROM basic_details WHERE basic_details_id =?",
+            [propertyDetailsBasicId],
+            function (err, bookingStatus, fields) {
+              if (err) throw err;
+
+              return res.status(200).json({
+                status: "success",
+                message: "Updated Successfully",
+                data: results,
+                bookingStatus: bookingStatus,
+              });
+            }
+          );
+        });
+      } else {
+        connection.query(
+          `Select * FROM property_details`,
+          function (error, results, fields) {
+            if (error) throw error;
+
+            connection.query(
+              "INSERT INTO `property_details`(`pd_customer_id`,`pd_basic_id`,`pd_top_size`,`pd_top_name`,`pd_right_size`,`pd_right_name`,`pd_bottom_size`,`pd_bottom_name`,`pd_left_size`,`pd_left_name`,`pd_street_facing`,`pd_built_area`,`created_at`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+              [
+                propertyDetailsCustomerId,
+                propertyDetailsBasicId,
+                topSize,
+                topName,
+                rightSize,
+                rightName,
+                bottomSize,
+                bottomName,
+                leftSize,
+                leftName,
+                streetFacing,
+                builtArea,
+                new Date(),
+              ],
+              (err, result) => {
+                if (err) {
+                  throw err;
+                  return res
+                    .status(400)
+                    .json({ status: "failed", message: err });
+                } else {
+                  connection.query(
+                    "SELECT * FROM additional_details WHERE ad_basic_id=?",
+                    [propertyDetailsBasicId],
+                    function (err, propertyDetails, fields) {
+                      if (err) throw err;
+
+                      if (propertyDetails.length > 0) {
+                        connection.query(
+                          "SELECT * FROM construction_details WHERE cd_basic_id=?",
+                          [propertyDetailsBasicId],
+                          function (err, constructionDetails, fields) {
+                            if (err) throw err;
+
+                            if (constructionDetails.length > 0) {
+                              connection.query(
+                                "UPDATE basic_details SET booking_status = ? WHERE basic_details_id = ?",
+                                ["Complete", propertyDetailsBasicId]
+                              );
+
+                              connection.query(
+                                "SELECT booking_status FROM basic_details WHERE basic_details_id =?",
+                                [propertyDetailsBasicId],
+                                function (err, bookingStatus, fields) {
+                                  if (err) throw err;
+                                  console.log({ bookingStatus });
+                                  return res.status(200).json({
+                                    status: "success",
+                                    message:
+                                      "Property Details Entered Successfully",
+                                    id: result.insertId,
+                                    bookingStatus: bookingStatus,
+                                  });
+                                }
+                              );
+                            }
+                          }
+                        );
+                      } else {
+                        connection.query(
+                          "SELECT booking_status FROM basic_details WHERE basic_details_id =?",
+                          [propertyDetailsBasicId],
+                          function (err, bookingStatus, fields) {
+                            if (err) throw err;
+                            console.log({ bookingStatus });
+                            return res.status(200).json({
+                              status: "success",
+                              message: "Property Details Entered Successfully",
+                              id: result.insertId,
+                              bookingStatus: bookingStatus,
+                            });
+                          }
+                        );
+                      }
+                    }
+                  );
+                }
+              }
+            );
+          }
+        );
+      }
     }
   );
 };
@@ -503,33 +437,134 @@ module.exports.additionalDetails = async (req, res) => {
     req.body;
 
   await connection.query(
-    `Select * FROM additional_details`,
+    "Select * FROM additional_details WHERE ad_basic_id=?",
+    [additionalBasicId],
     function (error, results, fields) {
       if (error) throw error;
 
-      connection.query(
-        "INSERT INTO `additional_details`(`ad_customer_id`,`ad_basic_id`,`ad_requirement`,`ad_image`,`created_at`) VALUES(?,?,?,?,?)",
-        [
+      if (results.length > 0) {
+        let sql = `UPDATE additional_details
+                     SET ad_customer_id = ?,
+                         ad_requirement = ?,
+                         ad_image=?,
+                         updated_at=?
+                     WHERE ad_basic_id = ?`;
+        let data = [
           additionalCustomerId,
-          additionalBasicId,
           additionalRequirement,
           additionalImage,
           new Date(),
-        ],
-        (err, result) => {
-          if (err) {
-            throw err;
-            return res.status(400).json({ status: "failed", message: err });
-          } else {
-            return res.status(200).json({
-              status: "success",
+          additionalBasicId,
+        ];
 
-              message: "Additional Details Entered Successfully",
-              id: result.insertId,
-            });
+        connection.query(sql, data, (error, results, fields) => {
+          if (error) {
+            console.log({ error });
+            return res
+              .status(400)
+              .json({ status: "failed", message: "Something Went Wrong!!!" });
           }
-        }
-      );
+
+          connection.query(
+            "SELECT booking_status FROM basic_details WHERE basic_details_id =?",
+            [additionalBasicId],
+            function (err, bookingStatus, fields) {
+              if (err) throw err;
+
+              return res.status(200).json({
+                status: "success",
+                message: "Updated Successfully",
+                data: results,
+                bookingStatus: bookingStatus,
+              });
+            }
+          );
+        });
+      } else {
+        connection.query(
+          `Select *
+               FROM additional_details`,
+          function (error, results, fields) {
+            if (error) throw error;
+
+            connection.query(
+              "INSERT INTO `additional_details`(`ad_customer_id`,`ad_basic_id`,`ad_requirement`,`ad_image`,`created_at`) VALUES(?,?,?,?,?)",
+              [
+                additionalCustomerId,
+                additionalBasicId,
+                additionalRequirement,
+                additionalImage,
+                new Date(),
+              ],
+              (err, result) => {
+                if (err) {
+                  throw err;
+                  return res
+                    .status(400)
+                    .json({ status: "failed", message: err });
+                } else {
+                  connection.query(
+                    "SELECT * FROM property_details WHERE pd_basic_id=?",
+                    [additionalBasicId],
+                    function (err, propertyDetails, fields) {
+                      if (err) throw err;
+
+                      if (propertyDetails.length > 0) {
+                        connection.query(
+                          "SELECT * FROM construction_details WHERE cd_basic_id=?",
+                          [additionalBasicId],
+                          function (err, constructionDetails, fields) {
+                            if (err) throw err;
+
+                            if (constructionDetails.length > 0) {
+                              connection.query(
+                                "UPDATE basic_details SET booking_status = ? WHERE basic_details_id = ?",
+                                ["Complete", additionalBasicId]
+                              );
+
+                              connection.query(
+                                "SELECT booking_status FROM basic_details WHERE basic_details_id =?",
+                                [additionalBasicId],
+                                function (err, bookingStatus, fields) {
+                                  if (err) throw err;
+
+                                  return res.status(200).json({
+                                    status: "success",
+                                    message:
+                                      "Additional Details Entered Successfully",
+                                    id: result.insertId,
+                                    bookingStatus: bookingStatus,
+                                  });
+                                }
+                              );
+                            }
+                          }
+                        );
+                      } else {
+                        connection.query(
+                          "SELECT booking_status FROM basic_details WHERE basic_details_id =?",
+                          [additionalBasicId],
+                          function (err, bookingStatus, fields) {
+                            if (err) throw err;
+
+                            return res.status(200).json({
+                              status: "success",
+                              message:
+                                "Additional Details Entered Successfully",
+                              id: result.insertId,
+                              bookingStatus: bookingStatus,
+                            });
+                          }
+                        );
+                      }
+                    }
+                  );
+                }
+              }
+            );
+          }
+        );
+      }
     }
   );
 };
@@ -539,27 +574,155 @@ module.exports.constructionDetails = async (req, res) => {
 
   let val = JSON.stringify(data);
   await connection.query(
-    `Select * FROM construction_details`,
+    "Select * FROM construction_details WHERE cd_basic_id=?",
+    [basicId],
     function (error, results, fields) {
       if (error) throw error;
 
-      connection.query(
-        "INSERT INTO `construction_details`(`cd_customer_id`,cd_basic_id,`cd_details`,`created_at`) VALUES(?,?,?,?)",
-        [customerId, basicId, val, new Date()],
-        (err, result) => {
-          if (err) {
-            throw err;
-            return res.status(400).json({ status: "failed", message: err });
-          } else {
-            return res.status(200).json({
-              status: "success",
+      if (results.length > 0) {
+        let sql = `UPDATE construction_details
+                     SET cd_customer_id = ?,
+                         cd_details = ?,
+                         
+                         updated_at=?
+                     WHERE cd_basic_id = ?`;
+        let data = [customerId, val, new Date(), basicId];
 
-              message: "Construction Details Entered Successfully",
-              id: result.insertId,
-            });
+        connection.query(sql, data, (error, results, fields) => {
+          if (error) {
+            console.log({ error });
+            return res
+              .status(400)
+              .json({ status: "failed", message: "Something Went Wrong!!!" });
           }
-        }
-      );
+
+          connection.query(
+            "SELECT booking_status FROM basic_details WHERE basic_details_id =?",
+            [basicId],
+            function (err, bookingStatus, fields) {
+              if (err) throw err;
+
+              return res.status(200).json({
+                status: "success",
+                message: "Updated Successfully",
+                data: results,
+                bookingStatus: bookingStatus,
+              });
+            }
+          );
+        });
+      } else {
+        connection.query(
+          "INSERT INTO `construction_details`(`cd_customer_id`,`cd_basic_id`,`cd_details`,`created_at`) VALUES(?,?,?,?)",
+          [customerId, basicId, val, new Date()],
+          (err, result) => {
+            if (err) {
+              throw err;
+              return res.status(400).json({ status: "failed", message: err });
+            } else {
+              connection.query(
+                "Select  property_details.*, additional_details.* FROM property_details inner join additional_details on additional_details.ad_basic_id=property_details.pd_basic_id  WHERE pd_basic_id=?",
+                [basicId],
+                function (error, result, fields) {
+                  if (error) throw error;
+
+                  if (result.length > 0) {
+                    connection.query(
+                      "UPDATE basic_details SET booking_status = ? WHERE basic_details_id = ?",
+                      ["Complete", basicId]
+                    );
+                    connection.query(
+                      "SELECT booking_status FROM basic_details WHERE basic_details_id =?",
+                      [basicId],
+                      function (err, bookingStatus, fields) {
+                        if (err) throw err;
+
+                        return res.status(200).json({
+                          status: "success",
+                          message: "Construction Details Entered Successfully",
+                          id: result.insertId,
+                          bookingStatus: bookingStatus,
+                        });
+                      }
+                    );
+                  } else {
+                    connection.query(
+                      "SELECT booking_status FROM basic_details WHERE basic_details_id =?",
+                      [basicId],
+                      function (err, bookingStatus, fields) {
+                        if (err) throw err;
+
+                        return res.status(200).json({
+                          status: "success",
+                          message: "Construction Details Entered Successfully",
+                          id: result.insertId,
+                          bookingStatus: bookingStatus,
+                        });
+                      }
+                    );
+                  }
+                }
+              );
+
+              // connection.query(
+              //   "SELECT * FROM property_details WHERE pd_basic_id=?",
+              //   [basicId],
+              //   function (err, propertyDetails, fields) {
+              //     if (err) throw err;
+              //
+              //     if (propertyDetails.length > 0) {
+              //       connection.query(
+              //         "SELECT * FROM additional_details WHERE ad_basic_id=?",
+              //         [basicId],
+              //         function (err, additionalDetails, fields) {
+              //           if (err) throw err;
+              //
+              //           if (additionalDetails.length > 0) {
+              //             connection.query(
+              //               "UPDATE basic_details SET booking_status = ? WHERE basic_details_id = ?",
+              //               ["Complete", basicId]
+              //             );
+              //
+              //             connection.query(
+              //               "SELECT booking_status FROM basic_details WHERE basic_details_id =?",
+              //               [basicId],
+              //               function (err, bookingStatus, fields) {
+              //                 if (err) throw err;
+              //
+              //                 return res.status(200).json({
+              //                   status: "success",
+              //                   message:
+              //                     "Construction Details Entered Successfully",
+              //                   id: result.insertId,
+              //                   bookingStatus: bookingStatus,
+              //                 });
+              //               }
+              //             );
+              //           }
+              //         }
+              //       );
+              //     } else {
+              //       connection.query(
+              //         "SELECT booking_status FROM basic_details WHERE basic_details_id =?",
+              //         [basicId],
+              //         function (err, bookingStatus, fields) {
+              //           if (err) throw err;
+              //
+              //           return res.status(200).json({
+              //             status: "success",
+              //             message: "Construction Details Entered Successfully",
+              //             id: result.insertId,
+              //             bookingStatus: bookingStatus,
+              //           });
+              //         }
+              //       );
+              //     }
+              //   }
+              // );
+            }
+          }
+        );
+      }
     }
   );
 };
@@ -575,6 +738,58 @@ module.exports.getDetails = async (req, res) => {
       return res.status(200).json({
         status: "success",
         data: result,
+        message: "Fetch Successfully",
+      });
+    }
+  );
+};
+
+module.exports.getBasicDetailsById = async (req, res) => {
+  const { id } = req.body;
+  connection.query(
+    "Select * FROM basic_details WHERE basic_details_id=?",
+    [id],
+    function (error, results, fields) {
+      if (error) throw error;
+
+      return res.status(200).json({
+        status: "success",
+        data: results,
+        message: "Fetch Successfully",
+      });
+    }
+  );
+};
+
+module.exports.getPropertyDetailsByBasicId = async (req, res) => {
+  const { id } = req.body;
+  connection.query(
+    "Select * FROM property_details WHERE pd_basic_id=?",
+    [id],
+    function (error, results, fields) {
+      if (error) throw error;
+
+      return res.status(200).json({
+        status: "success",
+        data: results,
+        message: "Fetch Successfully",
+      });
+    }
+  );
+};
+
+module.exports.basicDetailsByCustomerId = async (req, res) => {
+  const { id } = req.body;
+
+  connection.query(
+    "Select * FROM basic_details WHERE customer_customer_id=? AND booking_status=?",
+    [id, "Draft"],
+    function (error, results, fields) {
+      if (error) throw error;
+
+      return res.status(200).json({
+        status: "success",
+        data: results,
         message: "Fetch Successfully",
       });
     }

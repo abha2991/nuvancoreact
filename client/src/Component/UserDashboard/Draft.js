@@ -1,4 +1,5 @@
 import "../../UserDashboard.css";
+import arrow from "../../images/arrow.png";
 const Draft = () => {
   return (
     <>
@@ -18,7 +19,7 @@ const Draft = () => {
           <div className="box-draft">
             <div className="content-pending-draft">
               <span className="page-icon">
-                <img src="dist/img/page-icon.png" alt="" />>
+                <img src="dist/img/page-icon.png" alt="" />
               </span>
               <h2>Complete Your Form Details</h2>
               <p>Property Details</p>
@@ -102,6 +103,7 @@ const Draft = () => {
                       ></circle>
                       <circle
                         className="success-circle-fill"
+                        style={{ opacity: "0" }}
                         cx="12"
                         cy="12"
                         r="11.5"
@@ -113,7 +115,7 @@ const Draft = () => {
                     </g>
                   </svg>
                 </div>
-                <div className="cir-check check-four">
+                <div className="cir-check last-ch">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="svg-success"
@@ -132,6 +134,7 @@ const Draft = () => {
                       ></circle>
                       <circle
                         className="success-circle-fill"
+                        style={{ opacity: "0" }}
                         cx="12"
                         cy="12"
                         r="11.5"
@@ -144,12 +147,8 @@ const Draft = () => {
                   </svg>
                 </div>
               </div>
-              <a className="right-icon-jyu" href="#">
-                <img
-                  src="https://nuvanco.com/admin/dist/img/path9413.png"
-                  alt=""
-                />
-                >
+              <a className="right-icon-jyu" href="/user-draft-table">
+                <img src={arrow} alt="" />
               </a>
             </div>
           </div>
@@ -161,13 +160,13 @@ const Draft = () => {
                   Are you looking for custom layout, Kindly contact our best
                   professional architectural team
                 </p>
-                <a className="cont-btn" href="https://nuvanco.com/contact-us">
+                <a className="cont-btn" href="/contact">
                   Contact Us
                 </a>
               </div>
               <div className="right-con-box">
-                <img className="img-upo" src="dist/img/hous1.png" alt="" />>
-                <img className="img-dow" src="dist/img/house2.png" alt="" />>
+                <img className="img-upo" src="dist/img/hous1.png" alt="" />
+                <img className="img-dow" src="dist/img/house2.png" alt="" />
               </div>
             </div>
           </div>

@@ -1,9 +1,21 @@
 import React, { useState, useRef } from "react";
 import useUser from "../../../hooks/useUser";
+import { useLocation } from "react-router-dom";
 
 const AdditionalDetails = (props) => {
   const { user } = useUser();
   const inputRef = useRef(null);
+  const location = useLocation();
+  let sessionId = JSON.parse(sessionStorage.getItem("basicId"));
+  let parsedId = sessionId?.basic_id;
+  let BasicId = location?.state?.basicId;
+
+  if (BasicId) {
+    BasicId = BasicId;
+  } else {
+    BasicId = parsedId;
+  }
+
   const [additionalDetails, setAdditionalDetails] = useState({
     additionalRequirement: "",
   });
@@ -18,24 +30,22 @@ const AdditionalDetails = (props) => {
 
   const getAdditionalDetails = async () => {
     let element = document.querySelector("#myTab > li:nth-child(4) > a");
+
     const formData = new FormData();
     let inputFile = inputRef?.current?.files[0];
 
-    console.log({ inputFile });
     if (inputFile) {
       formData.append("file", inputRef.current.files[0]);
     } else {
     }
     const { additionalRequirement } = additionalDetails;
 
-    console.log(inputRef.current.files[0]);
-
     formData.append(
       "additionalRequirement",
       additionalDetails.additionalRequirement
     );
     formData.append("additionalCustomerId", user?.[0]?.customer_id);
-    formData.append("additionalBasicId", props?.basicId);
+    formData.append("additionalBasicId", BasicId);
 
     const res = await fetch(
       "http://localhost:8001/user-additional-details/AdditionalRequirements",
@@ -52,6 +62,9 @@ const AdditionalDetails = (props) => {
       window.alert(response.message);
     } else if (res.status === 200) {
       element.classList.add("check-icon", "active");
+      if (response?.bookingStatus?.[0]?.booking_status === "Complete") {
+        sessionStorage.removeItem("basicId");
+      }
       window.alert(response.message);
     }
   };

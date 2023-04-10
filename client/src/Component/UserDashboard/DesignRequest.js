@@ -1,4 +1,5 @@
 import "../../UserDashboard.css";
+import arrow from "../../images/arrow.png";
 const DesignRequest = () => {
   return (
     <>
@@ -10,7 +11,7 @@ const DesignRequest = () => {
               <a href="#">Home</a>
             </li>
             <li>
-              <i className="fa fa-angle-right"></i> Draft
+              <i className="fa fa-angle-right"></i> Design Request
             </li>
           </ol>
         </div>
@@ -18,7 +19,7 @@ const DesignRequest = () => {
           <div className="box-draft">
             <div className="content-pending-draft">
               <span className="page-icon">
-                <img src="dist/img/page-icon.png" alt="" />>
+                <img src="dist/img/page-icon.png" alt="" />
               </span>
               <h2>Complete Your Form Details</h2>
               <p>Property Details</p>
@@ -113,7 +114,7 @@ const DesignRequest = () => {
                     </g>
                   </svg>
                 </div>
-                <div className="cir-check check-four">
+                <div className="cir-check last-ch">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="svg-success"
@@ -144,12 +145,8 @@ const DesignRequest = () => {
                   </svg>
                 </div>
               </div>
-              <a className="right-icon-jyu" href="#">
-                <img
-                  src="https://nuvanco.com/admin/dist/img/path9413.png"
-                  alt=""
-                />
-                >
+              <a className="right-icon-jyu" href="/user-form-details">
+                <img src={arrow} alt="" />
               </a>
             </div>
           </div>
@@ -161,13 +158,13 @@ const DesignRequest = () => {
                   Are you looking for custom layout, Kindly contact our best
                   professional architectural team
                 </p>
-                <a className="cont-btn" href="https://nuvanco.com/contact-us">
+                <a className="cont-btn" href="/contact">
                   Contact Us
                 </a>
               </div>
               <div className="right-con-box">
-                <img className="img-upo" src="dist/img/hous1.png" alt="" />>
-                <img className="img-dow" src="dist/img/house2.png" alt="" />>
+                <img className="img-upo" src="dist/img/hous1.png" alt="" />
+                <img className="img-dow" src="dist/img/house2.png" alt="" />
               </div>
             </div>
           </div>

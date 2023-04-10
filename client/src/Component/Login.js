@@ -1,11 +1,12 @@
 import useUser from "../hooks/useUser";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import Logo from "../images/logo.png";
 const Login = () => {
   const { user } = useUser();
+
   const { fetchUser } = useUser();
 
   const navigate = useNavigate();
@@ -56,13 +57,23 @@ const Login = () => {
     }
   };
 
+  const closeLoginModal = () => {
+    let element = document.getElementById("login-modal");
+    element.click();
+  };
+
   return (
     <>
       <div className="modal" id="myModal">
         <div className="modal-dialog">
           <div className="modal-content img-bg-login">
             <div className="modal-header">
-              <button type="button" className="close" data-dismiss="modal">
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                id="login-modal"
+              >
                 &times;
               </button>
             </div>
@@ -113,6 +124,7 @@ const Login = () => {
                           data-target="#forgot-password"
                           data-toggle="modal"
                           href="#!"
+                          onClick={closeLoginModal}
                         >
                           Forgot password?
                         </a>

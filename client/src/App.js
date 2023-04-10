@@ -19,6 +19,10 @@ import UserProfileUpdate from "./Pages/UserProfileUpdate";
 import UserUploadImage from "./Pages/UserUploadImage";
 import Logout from "./Component/Logout";
 import UserDetails from "./Component/UserDashboard/UserDetails";
+import UserBasicDetails from "./Component/UserDashboard/UserForm/UserBasicDetails";
+import DraftTable from "./Component/UserDashboard/DraftTable";
+import Draft from "./Component/UserDashboard/Draft";
+import UserFormDetails from "./Component/UserDashboard/UserForm/UserFormDetails";
 
 function App() {
   const { initializing } = useUser();
@@ -48,6 +52,9 @@ function App() {
         <Route path={"/user-profile"} element={<UserProfile />} />
         <Route path={"/user-profile-update"} element={<UserProfileUpdate />} />
         <Route path={"/user-update-image"} element={<UserUploadImage />} />
+        <Route path={"/user-basic-details"} element={<UserBasicDetails />} />
+        <Route path={"/user-draft-table"} element={<DraftTable />} />
+        <Route path={"/user-form-details"} element={<UserFormDetails />} />
       </Routes>
     </>
   );

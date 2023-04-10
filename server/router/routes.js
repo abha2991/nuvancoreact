@@ -38,6 +38,10 @@ router.get("/user-logout", user.logout);
 
 router.post("/user-basic-details", user.basicDetails);
 router.post("/user-property-details", user.propertyDetails);
+router.post("/user-basic-details-id", user.getBasicDetailsById);
+router.post("/user-property-details-id", user.getPropertyDetailsByBasicId);
+
+router.post("/user-basic-details-list", user.basicDetailsByCustomerId);
 router.post(
   "/user-additional-details/:type",
   authenticateUser,

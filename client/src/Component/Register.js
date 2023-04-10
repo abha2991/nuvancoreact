@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+import logo from "../images/logo.png";
 const Register = () => {
   const navigate = useNavigate();
   const [registerData, setRegisterData] = useState({
@@ -68,10 +69,7 @@ const Register = () => {
                   </p>
                 </div>
                 <div className="right-login-form col-lg-7">
-                  <img
-                    src="https://nuvanco.com/assets/images/logo.png"
-                    alt=""
-                  />
+                  <img src={logo} alt="" />
                   <div role="tabpanel">
                     <div
                       id="individualSubmitError"
@@ -168,124 +166,6 @@ const Register = () => {
                             />
                             <span
                               id="passwordError"
-                              className="text-danger"
-                            ></span>
-                          </div>
-
-                          <button
-                            type="submit"
-                            className="btn btn-primary btn-block mb-4"
-                          >
-                            Sign Up
-                          </button>
-                        </form>
-                      </div>
-                      <div role="tabpanel" className="tab-pane" id="Corporate">
-                        <form
-                          className="form-ind"
-                          id="corporateRegistration"
-                          method="post"
-                          action="'/submitCorporateRegistration'"
-                        >
-                          <input
-                            type="hidden"
-                            name="_token"
-                            value="jqFPFYtfnWrqKLunJ5O3Ux7D9o6dvJvw9SBXyvcH"
-                          />
-                          <div className="form-outline mb-4">
-                            <label
-                              className="form-label"
-                              htmlFor="form2Example1"
-                            >
-                              Full Name{" "}
-                            </label>
-                            <input
-                              type="text"
-                              id="customer_name"
-                              name="customer_name"
-                              required=""
-                              className="form-control"
-                            />
-                            <span
-                              id="fullNameError1"
-                              className="text-danger"
-                            ></span>
-                          </div>
-                          <div className="form-outline mb-4">
-                            <label
-                              className="form-label"
-                              htmlFor="form2Example1"
-                            >
-                              Email address{" "}
-                            </label>
-                            <input
-                              type="email"
-                              id="customer_email"
-                              name="customer_email"
-                              required=""
-                              className="form-control"
-                            />
-                            <span
-                              id="emailAddressError1"
-                              className="text-danger"
-                            ></span>
-                          </div>
-                          <div className="form-outline mb-4">
-                            <label
-                              className="form-label"
-                              htmlFor="form2Example2"
-                            >
-                              Contact Number{" "}
-                            </label>
-                            <input
-                              type="number"
-                              id="customer_mobile"
-                              name="customer_mobile"
-                              required=""
-                              className="form-control"
-                            />
-                            <span
-                              id="contactNumberError1"
-                              className="text-danger"
-                            ></span>
-                          </div>
-
-                          <div className="form-outline mb-4">
-                            <label
-                              className="form-label"
-                              htmlFor="form2Example1"
-                            >
-                              Company Name{" "}
-                            </label>
-                            <input
-                              type="text"
-                              id="customer_company_name"
-                              name="customer_company_name"
-                              required=""
-                              className="form-control"
-                            />
-                            <span
-                              id="companyNameError1"
-                              className="text-danger"
-                            ></span>
-                          </div>
-
-                          <div className="form-outline mb-4">
-                            <label
-                              className="form-label"
-                              htmlFor="form2Example2"
-                            >
-                              Password
-                            </label>
-                            <input
-                              type="password"
-                              id="customer_password"
-                              name="customer_password"
-                              required=""
-                              className="form-control"
-                            />
-                            <span
-                              id="passwordError1"
                               className="text-danger"
                             ></span>
                           </div>

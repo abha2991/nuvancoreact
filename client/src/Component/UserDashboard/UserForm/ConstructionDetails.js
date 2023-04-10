@@ -12,6 +12,8 @@ import tight from "../../../images/tity.png";
 import cosy from "../../../images/cosy.png";
 import useUser from "../../../hooks/useUser";
 
+import { useLocation } from "react-router-dom";
+
 const BedroomType = {
   Cozy: "Cozy",
   Luxury: "Luxury",
@@ -347,6 +349,17 @@ function FloorComponent({ floorIndex }) {
 }
 
 export default function ConstructionDetails(props) {
+  const location = useLocation();
+  let sessionId = JSON.parse(sessionStorage.getItem("basicId"));
+  let parsedId = sessionId?.basic_id;
+  let BasicId = location?.state?.basicId;
+
+  if (BasicId) {
+    BasicId = BasicId;
+  } else {
+    BasicId = parsedId;
+  }
+
   const { user } = useUser();
   const methods = useForm();
   const floorMethods = useFieldArray({
@@ -367,15 +380,20 @@ export default function ConstructionDetails(props) {
       },
       body: JSON.stringify({
         data,
-        basicId,
+        basicId: BasicId,
         customerId,
       }),
     });
     const response = await res.json();
+
+    console.log({ response });
     if (res.status === 400 || !response) {
       window.alert(response.message);
     } else if (res.status === 200) {
       element.classList.add("check-icon");
+      if (response?.bookingStatus?.[0]?.booking_status === "Complete") {
+        sessionStorage.removeItem("basicId");
+      }
       window.alert(response.message);
       element1.click();
     }

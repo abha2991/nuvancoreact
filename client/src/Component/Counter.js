@@ -5,7 +5,7 @@ const Counter = ({ initial, final }) => {
 
   useEffect(() => {
     let increse = final / 200;
-    console.log(increse);
+
     let interval = setInterval(() => {
       setCount((prev) => {
         if (prev > final) {

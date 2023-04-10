@@ -1,6 +1,7 @@
 import "../../UserDashboard.css";
 import Logo from "../../images/logo.png";
 import useUser from "../../hooks/useUser";
+import smallLogo from "../../images/favicon.png";
 
 const Header = () => {
   const { user } = useUser();
@@ -10,7 +11,7 @@ const Header = () => {
       <header className="main-header">
         <a href="/dashboard" className="logo blue-bg">
           <span className="logo-mini">
-            <img src={Logo} />
+            <img src={smallLogo} />
           </span>
           <span className="logo-lg">
             <img src={Logo} alt="" style={{ height: "50px", width: "150px" }} />

@@ -2503,7 +2503,7 @@ button.head-login-btn {
   width: 100%;
   position: absolute;
   z-index: 3;
-  color: white;
+  color: white !important;
   opacity: 0;
   transform: translateY(30px);
   transition: 0.5s;

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 
 const UpdateProfile = () => {
   const { user } = useUser();
+
   const { fetchUser } = useUser();
   const navigate = useNavigate();
   const [countryOptions, setCountryOptions] = useState([]);
@@ -12,13 +13,13 @@ const UpdateProfile = () => {
   const [cityOptions, setCityOptions] = useState([]);
 
   const [country, setCountry] = useState({
-    Country: user[0]?.customer_country,
+    Country: user?.[0]?.customer_country,
   });
   const [state, setState] = useState({
-    State: user[0]?.customer_state,
+    State: user?.[0]?.customer_state,
   });
   const [city, setCity] = useState({
-    City: user[0]?.customer_city,
+    City: user?.[0]?.customer_city,
   });
 
   const CountryOptions = async (e) => {
@@ -101,11 +102,11 @@ const UpdateProfile = () => {
   }, [state.State]);
 
   const [userData, setUserData] = useState({
-    name: user[0]?.customer_name,
-    email: user[0]?.customer_email,
-    phoneNumber: user[0]?.customer_mobile,
-    pin: user[0]?.customer_zipcode,
-    address: user[0]?.customer_address,
+    name: user?.[0]?.customer_name,
+    email: user?.[0]?.customer_email,
+    phoneNumber: user?.[0]?.customer_mobile,
+    pin: user?.[0]?.customer_zipcode,
+    address: user?.[0]?.customer_address,
   });
 
   let name, value;

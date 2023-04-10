@@ -1,14 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useUser from "../../../hooks/useUser";
 import PropertyDetails from "./PropertyDetails";
 import AdditionalDetails from "./AdditionalDetails";
 import ConstructionDetails from "./ConstructionDetails";
-import { useNavigate } from "react-router";
+
+import { useLocation } from "react-router-dom";
 
 const BasicDetails = () => {
+  let expirationDate = new Date(new Date().getTime() + 60000 * 2);
+
   const { user } = useUser();
 
-  const navigate = useNavigate();
+  const location = useLocation();
+  let sessionId = JSON.parse(sessionStorage.getItem("basicId"));
+  let parsedId = sessionId?.basic_id;
+  let BasicId = location?.state?.basicId;
+
+  if (BasicId) {
+    BasicId = BasicId;
+  } else {
+    BasicId = parsedId;
+  }
+
+  //let item_value = sessionStorage.getItem("basic_id");
+
+  const [data, setData] = useState();
+
+  const getBasicDetailsById = async () => {
+    const res = await fetch("http://localhost:8001/user-basic-details-id", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: BasicId,
+      }),
+    });
+    const response = await res.json();
+
+    if (res.status === 200) {
+      setData(response?.data);
+    }
+  };
+
+  useEffect(() => {
+    getBasicDetailsById().then((r) => console.log(r));
+  }, [BasicId]);
 
   const [basicId, setBasicId] = useState();
   const [basicDetails, setBasicDetails] = useState({
@@ -17,6 +55,17 @@ const BasicDetails = () => {
     startPlanning: "",
     propertyStatus: "",
   });
+
+  useEffect(() => {
+    if (data) {
+      setBasicDetails({
+        location: data?.[0]?.basic_details_location ?? "",
+        city: data?.[0]?.basic_details_city ?? "",
+        startPlanning: data?.[0]?.basic_details_startplanning ?? "",
+        propertyStatus: data?.[0]?.property_status ?? "",
+      });
+    }
+  }, [data]);
 
   let name, value;
   const handleBasicDetails = (e) => {
@@ -51,11 +100,18 @@ const BasicDetails = () => {
     if (res.status === 400 || !response) {
       window.alert(response.message);
     } else if (res.status === 200) {
+      let newValue = {
+        basic_id: response?.id,
+        expirationDate: expirationDate.toISOString(),
+      };
+      sessionStorage.setItem("basicId", JSON.stringify(newValue));
+      // sessionStorage.setItem("basic_id", response?.id);
       element.classList.add("check-icon");
       window.alert(response.message);
       element1.click();
     }
   };
+
   return (
     <>
       <div className="tabs-pro form-style">

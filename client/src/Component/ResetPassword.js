@@ -2,6 +2,8 @@ import Logo from "../images/logo.png";
 import React from "react";
 
 const ResetPassword = () => {
+  let element = document.getElementById("login-modal");
+
   return (
     <>
       <div

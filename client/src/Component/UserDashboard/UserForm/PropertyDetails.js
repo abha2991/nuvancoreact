@@ -1,9 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useUser from "../../../hooks/useUser";
-import ConstructionDetails from "./ConstructionDetails";
+
+import { useLocation } from "react-router-dom";
 
 const PropertyDetails = (props) => {
   const { user } = useUser();
+
+  const location = useLocation();
+  let sessionId = JSON.parse(sessionStorage.getItem("basicId"));
+  let parsedId = sessionId?.basic_id;
+  console.log({ sessionId });
+
+  let BasicId = location?.state?.basicId;
+
+  if (BasicId) {
+    BasicId = BasicId;
+  } else {
+    BasicId = parsedId;
+  }
+
+  const [data, setData] = useState();
+
+  const getPropertyDetailsByBasicId = async () => {
+    const res = await fetch("http://localhost:8001/user-property-details-id", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: BasicId,
+      }),
+    });
+    const response = await res.json();
+
+    if (res.status === 200) {
+      setData(response?.data);
+    }
+  };
+
+  useEffect(() => {
+    getPropertyDetailsByBasicId().then((r) => console.log(r));
+  }, [BasicId]);
   const [propertyId, setPropertyId] = useState();
   const [propertyDetails, setPropertyDetails] = useState({
     topSize: "",
@@ -18,6 +56,23 @@ const PropertyDetails = (props) => {
     builtArea: "",
   });
 
+  useEffect(() => {
+    if (data) {
+      setPropertyDetails({
+        topSize: data?.[0]?.pd_top_size ?? "",
+        topName: data?.[0]?.pd_top_name ?? "",
+        rightSize: data?.[0]?.pd_right_size ?? "",
+        rightName: data?.[0]?.pd_right_name ?? "",
+        bottomSize: data?.[0]?.pd_bottom_size ?? "",
+        bottomName: data?.[0]?.pd_bottom_name ?? "",
+        leftSize: data?.[0]?.pd_left_size ?? "",
+        leftName: data?.[0]?.pd_left_name ?? "",
+        streetFacing: data?.[0]?.pd_street_facing ?? "",
+        builtArea: data?.[0]?.pd_built_area ?? "",
+      });
+    }
+  }, [data]);
+
   let name1, value1;
   const handlePropertyDetails = (e) => {
     name1 = e.target.name;
@@ -27,7 +82,6 @@ const PropertyDetails = (props) => {
   };
 
   const saveDetails = () => {
-    console.log({ propertyDetails });
     let elementSize1 = document.getElementById("dimension-top");
     let elementName1 = document.getElementById("dimension-drop-top");
     elementSize1.value = propertyDetails.topSize;
@@ -86,7 +140,7 @@ const PropertyDetails = (props) => {
         builtArea,
 
         propertyDetailsCustomerId: user?.[0]?.customer_id,
-        propertyDetailsBasicId: props.basicId,
+        propertyDetailsBasicId: BasicId,
       }),
     });
     const response = await res.json();
@@ -96,7 +150,9 @@ const PropertyDetails = (props) => {
       window.alert(response.message);
     } else if (res.status === 200) {
       element.classList.add("check-icon", "active");
-
+      if (response?.bookingStatus?.[0]?.booking_status === "Complete") {
+        sessionStorage.removeItem("basicId");
+      }
       window.alert(response.message);
       element1.click();
     }
@@ -299,6 +355,7 @@ const PropertyDetails = (props) => {
             value={propertyDetails.builtArea}
             onChange={handlePropertyDetails}
           >
+            <option value=""></option>
             <option>1% - 50%</option>
             <option>50 - 100%</option>
           </select>

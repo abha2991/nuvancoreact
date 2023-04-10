@@ -17,7 +17,7 @@ connection.connect(function (err) {
 });
 
 connection.query(
-  "SELECT * FROM customer_masters",
+  "SELECT * FROM basic_details",
   function (error, results, fields) {
     if (error) throw error;
 
