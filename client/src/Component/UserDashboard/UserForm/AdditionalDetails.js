@@ -10,6 +10,13 @@ const AdditionalDetails = (props) => {
   let parsedId = sessionId?.basic_id;
   let BasicId = location?.state?.basicId;
 
+  let expirationTime = sessionId?.expirationDate;
+
+  if (new Date(expirationTime) > new Date()) {
+  } else {
+    sessionStorage.removeItem("basicId");
+  }
+
   if (BasicId) {
     BasicId = BasicId;
   } else {
@@ -17,7 +24,7 @@ const AdditionalDetails = (props) => {
   }
 
   const [additionalDetails, setAdditionalDetails] = useState({
-    additionalRequirement: "",
+    additionalRequirement: "No Additional Requirements",
   });
 
   let name1, value1;
@@ -62,10 +69,11 @@ const AdditionalDetails = (props) => {
       window.alert(response.message);
     } else if (res.status === 200) {
       element.classList.add("check-icon", "active");
+      window.alert(response.message);
       if (response?.bookingStatus?.[0]?.booking_status === "Complete") {
         sessionStorage.removeItem("basicId");
+        window.location.reload();
       }
-      window.alert(response.message);
     }
   };
   return (

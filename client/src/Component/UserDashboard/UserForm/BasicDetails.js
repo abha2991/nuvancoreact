@@ -7,7 +7,7 @@ import ConstructionDetails from "./ConstructionDetails";
 import { useLocation } from "react-router-dom";
 
 const BasicDetails = () => {
-  let expirationDate = new Date(new Date().getTime() + 60000 * 2);
+  let expirationDate = new Date(new Date().getTime() + 60000 * 1 * 60);
 
   const { user } = useUser();
 
@@ -15,6 +15,12 @@ const BasicDetails = () => {
   let sessionId = JSON.parse(sessionStorage.getItem("basicId"));
   let parsedId = sessionId?.basic_id;
   let BasicId = location?.state?.basicId;
+  let expirationTime = sessionId?.expirationDate;
+
+  if (new Date(expirationTime) > new Date()) {
+  } else {
+    sessionStorage.removeItem("basicId");
+  }
 
   if (BasicId) {
     BasicId = BasicId;

@@ -41,7 +41,14 @@ router.post("/user-property-details", user.propertyDetails);
 router.post("/user-basic-details-id", user.getBasicDetailsById);
 router.post("/user-property-details-id", user.getPropertyDetailsByBasicId);
 
-router.post("/user-basic-details-list", user.basicDetailsByCustomerId);
+router.post(
+  "/user-basic-details-list-draft",
+  user.basicDetailsByCustomerIdDraft
+);
+router.post(
+  "/user-basic-details-list-complete",
+  user.basicDetailsByCustomerIdComplete
+);
 router.post(
   "/user-additional-details/:type",
   authenticateUser,

@@ -1,7 +1,7 @@
 import "../../UserDashboard.css";
 import useUser from "../../hooks/useUser";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
   const { user } = useUser();
@@ -164,13 +164,13 @@ const UpdateProfile = () => {
     <>
       <div className="content-wrapper">
         <div className="content-header sty-one">
-          <h1> Personal Informarion </h1>
+          <h1> Personal Information </h1>
           <ol className="breadcrumb">
             <li>
               <a href="">Home</a>
             </li>
             <li>
-              <i className="fa fa-angle-right"></i> Personal Informarion{" "}
+              <i className="fa fa-angle-right"></i> Personal Information{" "}
             </li>
           </ol>
         </div>
@@ -188,7 +188,7 @@ const UpdateProfile = () => {
                         name="name"
                         value={userData.name}
                         className="form-control"
-                        required=""
+                        required
                         onChange={handleInputs}
                       />
                     </fieldset>
@@ -230,12 +230,12 @@ const UpdateProfile = () => {
                         onChange={handleCountry}
                         className="form-control"
                       >
-                        {countryOptions?.data?.map((val, index) => {
+                        {countryOptions?.data?.map((val, ind) => {
                           if (!val) return null;
 
                           return (
                             <>
-                              <option value={val.country_id}>
+                              <option value={val.country_id} key={ind}>
                                 {val.country_name}
                               </option>
                             </>
@@ -260,7 +260,7 @@ const UpdateProfile = () => {
 
                           return (
                             <>
-                              <option value={val.state_id}>
+                              <option value={val.state_id} key={index}>
                                 {val.state_name}
                               </option>
                             </>
@@ -285,7 +285,7 @@ const UpdateProfile = () => {
 
                           return (
                             <>
-                              <option value={val.city_id}>
+                              <option value={val.city_id} key={index}>
                                 {val.city_name}
                               </option>
                             </>

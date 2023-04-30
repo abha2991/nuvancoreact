@@ -148,3 +148,36 @@ code {
   background-color: #e55922;
   color: white !important;
 }
+
+.user-form-div label {
+  color: #e55922;
+  font-weight: 800;
+  margin: 10px;
+  width: 200px;
+}
+
+.user-form-div {
+  margin: 5px;
+  display: flex;
+  padding-left: 50px;
+  padding-right: 20px;
+  padding-top: 5px;
+}
+
+.user-form-div p {
+  margin: 10px;
+}
+
+#example1 th {
+  /*color: #e55922;*/
+  font-weight: 800;
+  font-size: 22px;
+  text-align: center;
+}
+
+#example1 td:first-child {
+  /*color: #e55922;*/
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+}

@@ -9,7 +9,12 @@ const PropertyDetails = (props) => {
   const location = useLocation();
   let sessionId = JSON.parse(sessionStorage.getItem("basicId"));
   let parsedId = sessionId?.basic_id;
-  console.log({ sessionId });
+  let expirationTime = sessionId?.expirationDate;
+
+  if (new Date(expirationTime) > new Date()) {
+  } else {
+    sessionStorage.removeItem("basicId");
+  }
 
   let BasicId = location?.state?.basicId;
 
@@ -150,11 +155,12 @@ const PropertyDetails = (props) => {
       window.alert(response.message);
     } else if (res.status === 200) {
       element.classList.add("check-icon", "active");
-      if (response?.bookingStatus?.[0]?.booking_status === "Complete") {
-        sessionStorage.removeItem("basicId");
-      }
       window.alert(response.message);
       element1.click();
+      if (response?.bookingStatus?.[0]?.booking_status === "Complete") {
+        sessionStorage.removeItem("basicId");
+        window.location.reload();
+      }
     }
   };
   return (
@@ -186,7 +192,7 @@ const PropertyDetails = (props) => {
               placeholder="30"
               name="topSize"
               //value={propertyDetails.topSize}
-              disabled="true"
+              disabled={true}
               // onChange={handlePropertyDetails}
             />
             <input
@@ -197,7 +203,7 @@ const PropertyDetails = (props) => {
               placeholder="Property"
               name="topName"
               //value={propertyDetails.topName}
-              disabled="true"
+              disabled={true}
               // onChange={handlePropertyDetails}
             />
           </div>
@@ -225,7 +231,7 @@ const PropertyDetails = (props) => {
               name="rightSize"
               //value={propertyDetails.rightSize}
               //onChange={handlePropertyDetails}
-              disabled="true"
+              disabled={true}
             />
             <input
               type="text"
@@ -236,7 +242,7 @@ const PropertyDetails = (props) => {
               name="rightName"
               //value={propertyDetails.rightName}
               // onChange={handlePropertyDetails}
-              disabled="true"
+              disabled={true}
             />
           </div>
         </div>
@@ -263,7 +269,7 @@ const PropertyDetails = (props) => {
               name="bottomSize"
               //value={propertyDetails.bottomSize}
               //onChange={handlePropertyDetails}
-              disabled="true"
+              disabled={true}
             />
             <input
               type="text"
@@ -274,7 +280,7 @@ const PropertyDetails = (props) => {
               name="bottomName"
               //value={propertyDetails.bottomName}
               //onChange={handlePropertyDetails}
-              disabled="true"
+              disabled={true}
             />
           </div>
         </div>
@@ -300,7 +306,7 @@ const PropertyDetails = (props) => {
               placeholder="30"
               name="leftSize"
               //value={propertyDetails.leftSize}
-              disabled="true"
+              disabled={true}
               // onChange={handlePropertyDetails}
             />
             <input
@@ -311,7 +317,7 @@ const PropertyDetails = (props) => {
               placeholder="Property"
               name="leftName"
               //value={propertyDetails.leftName}
-              disabled="true"
+              disabled={true}
               // onChange={handlePropertyDetails}
             />
           </div>
@@ -334,11 +340,10 @@ const PropertyDetails = (props) => {
             id="direction-property"
             aria-describedby="emailHelp"
             placeholder="North"
-            disabled
             name="streetFacing"
             // value={propertyDetails.streetFacing}
             //onChange={handlePropertyDetails}
-            disbaled="true"
+            disabled={true}
           />
         </div>
         <div className="form-group">

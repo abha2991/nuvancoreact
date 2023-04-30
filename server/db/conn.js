@@ -17,7 +17,7 @@ connection.connect(function (err) {
 });
 
 connection.query(
-  "SELECT * FROM basic_details",
+  "SELECT * FROM admin_users",
   function (error, results, fields) {
     if (error) throw error;
 

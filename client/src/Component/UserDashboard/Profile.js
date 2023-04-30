@@ -78,13 +78,13 @@ const Profile = () => {
     <>
       <div className="content-wrapper">
         <div className="content-header sty-one">
-          <h1> Personal Informarion </h1>
+          <h1> Personal Information </h1>
           <ol className="breadcrumb">
             <li>
               <a href="https://nuvanco.com/astrologer/dashboard">Home</a>
             </li>
             <li>
-              <i className="fa fa-angle-right"></i> Personal Informarion{" "}
+              <i className="fa fa-angle-right"></i> Personal Information{" "}
             </li>
           </ol>
         </div>
@@ -100,7 +100,7 @@ const Profile = () => {
                       type="text"
                       value={user?.[0]?.customer_registration_id}
                       className="form-control"
-                      readOnly=""
+                      readOnly
                     />
                   </fieldset>
                 </div>
@@ -112,7 +112,7 @@ const Profile = () => {
                       type="text"
                       value={user?.[0]?.customer_name}
                       className="form-control"
-                      readOnly=""
+                      readOnly
                     />
                   </fieldset>
                 </div>
@@ -124,7 +124,7 @@ const Profile = () => {
                       type="text"
                       value={user?.[0]?.customer_email}
                       className="form-control"
-                      readOnly=""
+                      readOnly
                     />
                   </fieldset>
                 </div>
@@ -136,7 +136,7 @@ const Profile = () => {
                       type="text"
                       value={user?.[0]?.customer_mobile}
                       className="form-control"
-                      readOnly=""
+                      readOnly
                     />
                   </fieldset>
                 </div>
@@ -148,7 +148,7 @@ const Profile = () => {
                       type="text"
                       value={countryName?.country_name}
                       className="form-control"
-                      readOnly=""
+                      readOnly
                     />
                   </fieldset>
                 </div>
@@ -160,7 +160,7 @@ const Profile = () => {
                       type="text"
                       value={stateName?.state_name}
                       className="form-control"
-                      readOnly=""
+                      readOnly
                     />
                   </fieldset>
                 </div>
@@ -172,7 +172,7 @@ const Profile = () => {
                       type="text"
                       value={cityName?.city_name}
                       className="form-control"
-                      readOnly=""
+                      readOnly
                     />
                   </fieldset>
                 </div>
@@ -184,7 +184,7 @@ const Profile = () => {
                       type="text"
                       value={user?.[0]?.customer_zipcode}
                       className="form-control"
-                      readOnly=""
+                      readOnly
                     />
                   </fieldset>
                 </div>
@@ -196,7 +196,7 @@ const Profile = () => {
                       type="text"
                       value={user?.[0]?.customer_address}
                       className="form-control"
-                      readOnly=""
+                      readOnly
                     />
                   </fieldset>
                 </div>

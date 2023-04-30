@@ -18,7 +18,7 @@ import UserProfile from "./Pages/UserProfile";
 import UserProfileUpdate from "./Pages/UserProfileUpdate";
 import UserUploadImage from "./Pages/UserUploadImage";
 import Logout from "./Component/Logout";
-import UserDetails from "./Component/UserDashboard/UserDetails";
+import FormDetails from "./Component/UserDashboard/UserForm/FormDetails";
 import UserBasicDetails from "./Component/UserDashboard/UserForm/UserBasicDetails";
 import DraftTable from "./Component/UserDashboard/DraftTable";
 import Draft from "./Component/UserDashboard/Draft";
@@ -39,7 +39,7 @@ function App() {
         <Route path={"*"} element={<Navigate to={"/"} />} />
         <Route path={"/start-project"} element={<StartProject />} />
         <Route path={"/"} element={<Home />} />
-        <Route path={"/user-details"} element={<UserDetails />} />
+        <Route path={"/form-details"} element={<FormDetails />} />
         <Route path={"/about"} element={<About />} />
         <Route path={"/career"} element={<Career />} />
         <Route path={"/contact"} element={<Contact />} />

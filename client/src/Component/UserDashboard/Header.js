@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <>
       <header className="main-header">
-        <a href="/dashboard" className="logo blue-bg">
+        <a href="/" className="logo blue-bg">
           <span className="logo-mini">
             <img src={smallLogo} />
           </span>

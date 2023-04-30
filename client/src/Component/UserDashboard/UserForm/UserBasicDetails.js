@@ -3,7 +3,7 @@ import useUser from "../../../hooks/useUser";
 import Header from "../Header";
 import SideBar from "../SideBar";
 import Footer from "../Footer";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const UserBasicDetails = () => {
   const navigate = useNavigate();
@@ -11,16 +11,19 @@ const UserBasicDetails = () => {
   const [data, setData] = useState();
 
   const getBasicDetails = async () => {
-    const res = await fetch("http://localhost:8001/user-basic-details-list", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: user?.[0]?.customer_id,
-      }),
-    });
+    const res = await fetch(
+      "http://localhost:8001/user-basic-details-list-draft",
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: user?.[0]?.customer_id,
+        }),
+      }
+    );
     const response = await res.json();
 
     if (res.status === 200) {

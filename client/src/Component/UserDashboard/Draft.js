@@ -31,9 +31,9 @@ const Draft = () => {
                     viewBox="0 0 24 24"
                   >
                     <g
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-miterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeMiterlimit="10"
                     >
                       <circle
                         className="success-circle-outline"
@@ -61,9 +61,9 @@ const Draft = () => {
                     viewBox="0 0 24 24"
                   >
                     <g
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-miterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeMiterlimit="10"
                     >
                       <circle
                         className="success-circle-outline"
@@ -91,9 +91,9 @@ const Draft = () => {
                     viewBox="0 0 24 24"
                   >
                     <g
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-miterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeMiterlimit="10"
                     >
                       <circle
                         className="success-circle-outline"
@@ -122,9 +122,9 @@ const Draft = () => {
                     viewBox="0 0 24 24"
                   >
                     <g
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-miterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeMiterlimit="10"
                     >
                       <circle
                         className="success-circle-outline"
@@ -147,7 +147,7 @@ const Draft = () => {
                   </svg>
                 </div>
               </div>
-              <a className="right-icon-jyu" href="/user-draft-table">
+              <a className="right-icon-jyu" href="/user-basic-details">
                 <img src={arrow} alt="" />
               </a>
             </div>

@@ -55,9 +55,9 @@ const Dashboard = () => {
                             viewBox="0 0 24 24"
                           >
                             <g
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-miterlimit="10"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeMiterlimit="10"
                             >
                               <circle
                                 className="success-circle-outline"
@@ -85,9 +85,9 @@ const Dashboard = () => {
                             viewBox="0 0 24 24"
                           >
                             <g
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-miterlimit="10"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeMiterlimit="10"
                             >
                               <circle
                                 className="success-circle-outline"
@@ -115,9 +115,9 @@ const Dashboard = () => {
                             viewBox="0 0 24 24"
                           >
                             <g
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-miterlimit="10"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeMiterlimit="10"
                             >
                               <circle
                                 className="success-circle-outline"
@@ -145,9 +145,9 @@ const Dashboard = () => {
                             viewBox="0 0 24 24"
                           >
                             <g
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-miterlimit="10"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeMiterlimit="10"
                             >
                               <circle
                                 className="success-circle-outline"
@@ -205,9 +205,9 @@ const Dashboard = () => {
                             viewBox="0 0 24 24"
                           >
                             <g
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-miterlimit="10"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeMiterlimit="10"
                             >
                               <circle
                                 className="success-circle-outline"
@@ -235,9 +235,9 @@ const Dashboard = () => {
                             viewBox="0 0 24 24"
                           >
                             <g
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-miterlimit="10"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeMiterlimit="10"
                             >
                               <circle
                                 className="success-circle-outline"
@@ -265,9 +265,9 @@ const Dashboard = () => {
                             viewBox="0 0 24 24"
                           >
                             <g
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-miterlimit="10"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeMiterlimit="10"
                             >
                               <circle
                                 className="success-circle-outline"
@@ -295,9 +295,9 @@ const Dashboard = () => {
                             viewBox="0 0 24 24"
                           >
                             <g
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-miterlimit="10"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeMiterlimit="10"
                             >
                               <circle
                                 className="success-circle-outline"

@@ -353,6 +353,12 @@ export default function ConstructionDetails(props) {
   let sessionId = JSON.parse(sessionStorage.getItem("basicId"));
   let parsedId = sessionId?.basic_id;
   let BasicId = location?.state?.basicId;
+  let expirationTime = sessionId?.expirationDate;
+
+  if (new Date(expirationTime) > new Date()) {
+  } else {
+    sessionStorage.removeItem("basicId");
+  }
 
   if (BasicId) {
     BasicId = BasicId;
@@ -367,7 +373,7 @@ export default function ConstructionDetails(props) {
     control: methods?.control,
   });
   let basicId = props.basicId;
-  let customerId = user[0]?.customer_id;
+  let customerId = user?.[0]?.customer_id;
 
   const onSubmit = async (data) => {
     let element = document.querySelector("#myTab > li:nth-child(3) > a");
@@ -386,16 +392,16 @@ export default function ConstructionDetails(props) {
     });
     const response = await res.json();
 
-    console.log({ response });
     if (res.status === 400 || !response) {
       window.alert(response.message);
     } else if (res.status === 200) {
       element.classList.add("check-icon");
-      if (response?.bookingStatus?.[0]?.booking_status === "Complete") {
-        sessionStorage.removeItem("basicId");
-      }
       window.alert(response.message);
       element1.click();
+      if (response?.bookingStatus?.[0]?.booking_status === "Complete") {
+        sessionStorage.removeItem("basicId");
+        window.location.reload();
+      }
     }
   };
   const changeFloors = (event) => {
@@ -427,7 +433,9 @@ export default function ConstructionDetails(props) {
             <select onChange={changeFloors}>
               <option value=""></option>
               {range(1, 10).map((i) => (
-                <option value={i}>{i}</option>
+                <option value={i} key={i}>
+                  {i}
+                </option>
               ))}
             </select>
           </div>

@@ -7,8 +7,6 @@ import useUser from "../../../hooks/useUser";
 import Footer from "../../Footer";
 
 import BasicDetails from "./BasicDetails";
-import ConstructionDetails from "./ConstructionDetails";
-import { useLocation } from "react-router-dom";
 
 const StartProject = () => {
   const { user } = useUser();
